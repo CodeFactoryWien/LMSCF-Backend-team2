@@ -31,7 +31,7 @@
         Urban Mushroom
       </p>
       <div class="parallax-title-button">
-        <a style="z-index: 1000;" href="about-me.html" class="btn btn-white btn- animate">About me</a>
+        <a style="z-index: 1000;" href="aboutme.php" class="btn btn-white btn- animate">About me</a>
       </div>
     </div>
     <img src="img/parallax-mid.png" id="mid-parallax">
