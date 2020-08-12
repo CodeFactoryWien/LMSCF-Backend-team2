@@ -20,7 +20,7 @@
 <nav id="navbar" class="wrapper-nav sticky">
     <div class="nav-links">
         <div class="nav-left">
-            <a href="index.html" class="wrapper-logo">
+            <a href="index.php" class="wrapper-logo">
                 <img class="logo-nav" src="img/logo-body.png" alt="">
                 <img class="logo-nav" src="img/logo-arrow.png" alt="">
             </a>

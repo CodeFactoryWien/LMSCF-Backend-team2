@@ -5,8 +5,6 @@
 </head>
 <body class="main">
 
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaGomba</title>
@@ -29,7 +27,7 @@
 <nav id="navbar" class="wrapper-nav sticky">
     <div class="nav-links">
         <div class="nav-left">
-            <a href="index.html" class="wrapper-logo">
+            <a href="index.php" class="wrapper-logo">
                 <img class="logo-nav" src="img/logo-body.png" alt="">
                 <img class="logo-nav" src="img/logo-arrow.png" alt="">
             </a>
@@ -66,7 +64,7 @@
         </div>
         <div class="main-body">
             <div class="main-accordion">
-                <button class="accordion active">
+                <button class="accordion">
                     <div class="accordion-preview">
                         <div class="accordion-preview-tumbnail">
                             <img src="img/coverCaulifilower.png" alt="">
@@ -98,7 +96,7 @@
                         </div>
                     </div>
                 </button>
-                <div class="panel" style="display: block;">
+                <div class="panel">
                     <div class="wrapper-panel">
                         <div class="panel-needs">
                             <div class="panel-ingredients">
@@ -408,7 +406,7 @@
                         <div class="panel-needs">
                             <div class="panel-ingredients">
                                 <div class="panel-ingredients-title">
-                                    <h2>A dish for 4</h2>
+                                    <h2>A dish for 34</h2>
                                 </div>
                                 <div class="panel-ingredients-list">
                                     <ul class="panel-ingredients-left">
