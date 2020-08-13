@@ -1,3 +1,16 @@
+<?php
+  ob_start();
+  session_start();
+  require_once 'actions/db_connect.php';
+
+  // if session is not set this will redirect to login page
+  if( isset($_SESSION['admin']) && isset($_SESSION['user']) ) {
+    // select logged-in users details
+    $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+    $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+  }
+  
+?>
 <html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +27,6 @@
 
   <!-- JavaScript -->
   <script defer="" src="js/main.js"></script>
-  <script defer="" src="js/parallax.js"></script>
   <script defer="" src="js/stickyNav.js"></script>
 </head>
 <body class="main">
@@ -22,7 +34,6 @@
 <header class="wrapper-header" id="top">
   <div class="header-parallax">
     <img src="img/parallax-back.png" id="back-parallax">
-    <img src="img/parallax-mobile.png" id="mobile-parallax">
     <div class="parallax-title" id="titel-parallax">
       <h1 class="parallax-title-title">
         LaGomba
@@ -34,8 +45,6 @@
         <a style="z-index: 1000;" href="aboutme.php" class="btn btn-white btn- animate">About me</a>
       </div>
     </div>
-    <img src="img/parallax-mid.png" id="mid-parallax">
-    <img src="img/parallax-front.png" id="front-parallax">
   </div>
 </header>
 <!-- Header Parallax -->
@@ -50,6 +59,7 @@
       </a>
     </div>
     <div class="nav-right">
+      
       <a class="nav-link" href="index.php">
         <p><b>home</b></p>
       </a>
@@ -59,6 +69,17 @@
       <a class="nav-link" href="recipes.php">
         <p><b>recipes</b></p>
       </a>
+      <?php
+      if(!isset($_SESSION['user'])) {
+          echo '<div class="nav-link-contact">
+                <p><a href="login.php"><b>login</b></a></p>
+              </div>';
+      } else {
+        echo '<a class="nav-link" href="logout.php?logout" >
+                <p><b>log out</b></p>
+              </a>';
+      }
+      ?>
       <div class="nav-link-contact" id="contact-show">
         <p><b>contact</b></p>
       </div>
@@ -317,3 +338,5 @@
 
 
 </body></html>
+
+<?php ob_end_flush(); ?>

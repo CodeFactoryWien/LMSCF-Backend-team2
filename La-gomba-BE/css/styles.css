@@ -245,12 +245,11 @@ body {
   height: 85vh;
   top: 0;
   left: 0;
-  position: absolute;
+  position: center;
   -o-object-fit: cover;
   object-fit: cover;
   pointer-events: none;
   -webkit-filter: blur(6px);
-  filter: blur(6px);
 }
 
 .header-parallax #mid-parallax {
