@@ -86,40 +86,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login & Registration System</title>
+<title>Login & Registration System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   
-    <div class="container bg-info w-50 my-4 py-3">
+    <div class="container font-weight-bold mx-auto bg-info  my-4 py-3">
         <h3 class="text-center text-red my-3"><?php if ( isset($errMSG) ) {echo  $errMSG; }?></h3>
         <form method="post"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete= "off">
             <h3 class="text-center text-white">Register</h3>
-            <div class="form-group col-sm-10  mx-auto px-0">
+            <div class="form-group col-sm-5 mx-auto px-0">
                 <label for="name" class="text-white">Your name:</label><br>
                 <input type="text" name="name" id="name" class="form-control" placeholder= "Enter Full Name" value="<?php echo $name;?>" maxlength="50">
                 <span class="text-danger"><?php  echo $nameError; ?></span >
             </div>
-            <div class="form-group col-sm-10  mx-auto px-0">
-                <label for="username" class="text-white">Username:</label><br>
+            <div class="form-group col-sm-5 mx-auto px-0">
+                <label for="phone" class="text-white">Phone Number:</label><br>
+                <input type="text" name="phone" id="phone" class="form-control" placeholder= "Your phone number" value="<?php echo $phone;?>" maxlength="50">
+                <span class="text-danger"><?php  echo $nameError; ?></span >
+            </div>
+            <div class="form-group col-sm-5 mx-auto px-0">
+                <label for="address" class="text-white">Address:</label><br>
+                <input type="text" name="address" id="address" class="form-control" placeholder= "Enter your address" value="<?php echo $address;?>" maxlength="50">
+                <span class="text-danger"><?php  echo $nameError; ?></span >
+            </div>
+            <div class="form-group col-sm-5 mx-auto px-0">
+                <label for="username" class="text-white">Email:</label><br>
                 <input type="email" name="email" id="email" class="form-control" placeholder= "Enter Your Email" value="<?php echo $email;?>" maxlength="40">
                 <span class="text-danger"><?php  echo $emailError; ?></span >
             </div>
-            <div class="form-group col-sm-10  mx-auto px-0">
+            <div class="form-group col-sm-5 mx-auto px-0">
                 <label for="password" class="text-info">Password:</label><br>
                 <input type="password" name="pass" id="password" class="form-control" placeholder="Enter Password"  maxlength="15">
                 <span class="text-danger"><?php  echo $passError; ?></span>
             </div>
-            <div class="form-group col-sm-10  mx-auto px-0">
+            <div class="form-group col-sm-5 mx-auto px-0">
                 <label for="remember-me" class="text-white my-auto"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
             </div>
-            <div class="form-group col-sm-10  mx-auto px-0">  
+            <div class="form-group col-sm-5  mx-auto px-0">  
                 <input type="submit" name="btn-signup" class="btn btn-dark btn-md mb-2" value="Sign Up">
                 <a href="index.php" class=" btn btn-outline-dark btn-md mb-2">
                 Sign in here 

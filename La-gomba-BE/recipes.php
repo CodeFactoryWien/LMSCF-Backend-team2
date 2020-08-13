@@ -1,4 +1,5 @@
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes</title>
@@ -24,31 +25,13 @@
 
 
 <!-- Main Navbar -->
-<nav id="navbar" class="wrapper-nav sticky">
-    <div class="nav-links">
-        <div class="nav-left">
-            <a href="index.php" class="wrapper-logo">
-                <img class="logo-nav" src="img/logo-body.png" alt="">
-                <img class="logo-nav" src="img/logo-arrow.png" alt="">
-            </a>
-        </div>
-        <div class="nav-right">
-            <a class="nav-link" href="index.php">
-                <p><b>home</b></p>
-            </a>
-            <a class="nav-link" href="aboutme.php">
-                <p><b>about me</b></p>
-            </a>
-            <a class="nav-link" href="recipes.php">
-                <p><b>recipes</b></p>
-            </a>
-            <div class="nav-link-contact" id="contact-show">
-                <p><b>contact</b></p>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- Main Navbar -->
+    <?php
+        if(!isset($_SESSION['user'])) {
+          include 'nav_user.php';
+        } else {
+          include 'nav_admin.php';
+        }
+    ?>
 
 <!-- Main Content -->
 <main class="wrapper-main">

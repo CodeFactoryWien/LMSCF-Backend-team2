@@ -77,24 +77,24 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div class="container bg-info w-50 my-4 py-3">
+    <div class="container mx-auto bg-info py-3">
         <h3 class="text-center text-danger my-3"><?php if ( isset($errMSG) ) {echo  $errMSG; }?></h3>
         <form method="post"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete= "off">
             <h3 class="text-center text-white mb-3">Login</h3>
-            <div class="form-group col-sm-8 mx-auto px-0">
+            <div class="form-group col-sm-5 mx-auto px-0">
                 <label for="username" class="text-white">Username:</label><br>
                 <input type="email" name="email" id="email" class="form-control" placeholder= "Your Email" value="<?php echo $email;?>" maxlength="40">
                 <span class="text-danger"><?php  echo $emailError; ?></span >
             </div>
-            <div class="form-group col-sm-8 mx-auto px-0">
+            <div class="form-group col-sm-5 mx-auto px-0">
                 <label for="password" class="text-white">Password:</label><br>
                 <input type="password" name="pass" id="password" class="form-control" placeholder="Your Password"  maxlength="15">
                 <span class="text-danger"><?php  echo $passError; ?></span>
             </div>
-            <div class="form-group col-sm-8 mx-auto px-0">
+            <div class="form-group col-sm-5 mx-auto px-0">
                 <label for="remember-me" class="text-white my-auto"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
             </div>
-            <div class="form-group col-sm-8 mx-auto px-0">  
+            <div class="form-group col-sm-5 mx-auto px-0">  
                 <input type="submit" name="btn-login" class="btn btn-dark btn-md mb-2" value="Sign In">
                 <a href="register.php" class=" btn btn-outline-dark btn-md mb-2">
                 Sign up here 
