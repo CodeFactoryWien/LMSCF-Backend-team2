@@ -1,647 +1,198 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipes</title>
-</head>
-<body class="main">
+<?php
+    ob_start();
+    session_start();
+    require_once 'actions/db_connect.php';
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaGomba</title>
-
-    <!-- font -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&amp;display=swap" rel="stylesheet">
-
-    <!-- favicon -->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-
+    if( isset($_SESSION['admin']) && isset($_SESSION['user']) ) {
+        // select logged-in users details
+        $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+        $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+    }
+  
+?>
+<!DOCTYPE html>
+<html>
+<?php include 'head.php'; ?>
     <!-- JavaScript -->
     <script defer="" src="js/main.js"></script>
     <script defer="" src="js/recipes.js"></script>
 
+<body>
+    <!-- Header -->
+    <?php include 'header.php'; ?>
 
-<!-- Main Navbar -->
+    <!-- Main Navbar -->
     <?php
-        if(!isset($_SESSION['user'])) {
+        if(!isset($_SESSION['admin'])) {
           include 'nav_user.php';
         } else {
           include 'nav_admin.php';
         }
     ?>
 
-<!-- Main Content -->
-<main class="wrapper-main">
-    <div class="main-content">
-        <div class="main-title">
-            <h1>There´re so many Recipes</h1>
-            <p>
+    <!-- Main Content -->
+
+    <div class="container mx-auto my-5">
+        <div class="mx-auto">
+            <h1 class="text-center font-weight-bold">There´re so many Recipes</h1>
+            <p class="p-3">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
             </p>
         </div>
-        <div class="main-body">
-            <div class="main-accordion">
-                <button class="accordion">
-                    <div class="accordion-preview">
-                        <div class="accordion-preview-tumbnail">
-                            <img src="img/coverCaulifilower.png" alt="">
+        <div  class="container-fluid row row-cols-1 row-cols-md-1 row-cols-lg-1 mx-auto my-4">
+            <?php
+            $sql = "SELECT * FROM recipes";
+            $result = mysqli_query($conn, $sql);
+            // fetch the next row (as long as there are any) into $row
+            while($row = mysqli_fetch_assoc($result)) {
+                echo "
+                <button class="accordion mx-auto">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img class="card-img h-75" src="img/coverCaulifilower.png" alt="">
                         </div>
-                        <div class="accordion-preview-text">
-                            <div class="accordion-preview-text-title">
-                                <h1>Cauliflower &amp; Mushroom</h1>
-                            </div>
-                            <div class="accordion-preview-text-description">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore magna aliqua. Lorem ipsum dolor sit amet,
-                                    consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Lorem
-                                    ipsum dolor sit amet, consectetur adipisicing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.
-                                </p>
-                            </div>
+                        <div class="col-sm-8">
+                            <h1 class="mb-4">Cauliflower &amp; Mushroom</h1>
+                            <p class="p-3">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing
+                                elit, sed do eiusmod tempor incididunt ut labore et
+                                dolore magna aliqua. Lorem ipsum dolor sit amet,
+                                consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Lorem
+                                ipsum dolor sit amet, consectetur adipisicing elit,
+                                sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua.
+                            </p>
+                            
                             <div class="accordion-preview-text-stats">
-                                <p class="time">
-                                    1 hour 40 mins
-                                </p>
-                                <p class="difficulty">
-                                    Hard
-                                </p>
+                                <span>⏱️ 1 hour 40 mins</span>
+                                <span>📜 Hard</span>
                             </div>
                         </div>
                     </div>
                 </button>
-                <div class="panel">
-                    <div class="wrapper-panel">
-                        <div class="panel-needs">
-                            <div class="panel-ingredients">
-                                <div class="panel-ingredients-title">
-                                    <div class="panel-ingredients-title-dish">
-                                        <h2 class="panel-ingredients-title-dish-action">
-                                            -
-                                        </h2>
-                                        <h2>a dish for 3</h2>
-                                        <h2 class="panel-ingredients-title-dish-action">
-                                            +
-                                        </h2>
-                                    </div>
-                                    <hr>
-                                </div>
-                                <div class="panel-ingredients-list">
-                                    <!-- Quantities -->
-                                    <ul class="panel-ingredients-left">
-                                        <li>0.2</li>
-                                        <li>50</li>
-                                        <li>20</li>
-                                        <li>120</li>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>2</li>
-                                    </ul>
-                                    <!-- Quantities -->
-
-                                    <!-- Quantities Unit -->
-                                    <ul class="panel-ingredients-mid">
-                                        <li>kg</li>
-                                        <li>g</li>
-                                        <li>g</li>
-                                        <li>ml</li>
-                                        <li>TL</li>
-                                        <li>TL</li>
-                                        <li>TL</li>
-                                    </ul>
-                                    <!-- Quantities Unit -->
-
-                                    <!-- Quantities Text -->
-                                    <ul class="panel-ingredients-right">
-                                        <li>Cauliflower</li>
-                                        <li>Minced Mushroom</li>
-                                        <li>Oyster Mushroom</li>
-                                        <li>Onion</li>
-                                        <li>Paprika</li>
-                                        <li>Sour Cream</li>
-                                        <li>Cheese</li>
-                                    </ul>
-                                    <!-- Quantities Text -->
-                                </div>
-                            </div>
-                            <div class="panel-steps">
-                                <div class="panel-step">
-                                    <h2>Step. 1</h2>
-                                    <hr>
-                                    <p>One layer of steamed cauliflower</p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 2</h2>
-                                    <hr>
-                                    <p>
-                                        One layer of cooced minced mushrooms with onion and
-                                        paprika
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 3</h2>
-                                    <hr>
-                                    <p>
-                                        One layer of cooced (or steamed) rice.Basmati I use
-                                        here
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 4</h2>
-                                    <hr>
-                                    <p>
-                                        One cup of (vegan) sour cream and cheese goes on
-                                        top.
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 5</h2>
-                                    <hr>
-                                    <p>
-                                        With cheese avoid strong taste otherwise the whole
-                                        dish will taste like your cheese.
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 6</h2>
-                                    <hr>
-                                    <p>
-                                        25 minutes on 180 C or until the surface is golden
-                                        brown
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 7</h2>
-                                    <hr>
-                                    <p>A mincer and some great oyster mushrooms</p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 8</h2>
-                                    <hr>
-                                    <p>minced mushroom</p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 9</h2>
-                                    <hr>
-                                    <p>
-                                        Chopped onion fries till soft with a half tablespoon
-                                        paprika
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 10</h2>
-                                    <hr>
-                                    <p>
-                                        Fry the minced mushroom with the onion base for 5
-                                        minutes.
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 11</h2>
-                                    <hr>
-                                    <p>
-                                        Try to use a steamer or you can boil the cauliflower
-                                        for 5 minutes.
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 12</h2>
-                                    <hr>
-                                    <p>When soft then ready for layering.</p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <?php 
+                            for($i = 1 ; $i<count(result_steps); $i++)
+                            echo '<h2>Step. </h2>'.$i;
+                            echo '<hr>';
+                            echo rowsepts['<p>description</p>'];
+                        ?>
                     </div>
                 </div>
 
-                <button class="accordion">
-                    <div class="accordion-preview">
-                        <div class="accordion-preview-tumbnail">
-                            <img src="img/grilledCover.png" alt="">
-                        </div>
-                        <div class="accordion-preview-text">
-                            <div class="accordion-preview-text-title">
-                                <h1>Mushrooms Grilled</h1>
-                            </div>
-                            <div class="accordion-preview-text-description">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore magna aliqua. Lorem ipsum dolor sit amet,
-                                    consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Lorem
-                                    ipsum dolor sit amet, consectetur adipisicing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.
-                                </p>
-                            </div>
-                            <div class="accordion-preview-text-stats">
-                                <p class="time">
-                                    1 hour 14 mins
-                                </p>
-                                <p class="difficulty">
-                                    Medium
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </button>
-                <div class="panel">
-                    <div class="wrapper-panel">
-                        <div class="panel-needs">
-                            <div class="panel-ingredients">
-                                <div class="panel-ingredients-title">
-                                    <h2>A dish for 3</h2>
-                                </div>
-                                <div class="panel-ingredients-list">
-                                    <ul class="panel-ingredients-left">
-                                        <li>0.5</li>
-                                        <li>50</li>
-                                        <li>20</li>
-                                        <li>120</li>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>2</li>
-                                    </ul>
-                                    <ul class="panel-ingredients-mid">
-                                        <li>kg</li>
-                                        <li>g</li>
-                                        <li>g</li>
-                                        <li>ml</li>
-                                        <li>TL</li>
-                                        <li>TL</li>
-                                        <li>TL</li>
-                                    </ul>
-                                    <ul class="panel-ingredients-right">
-                                        <li>dsa</li>
-                                        <li>dsa</li>
-                                        <li>das</li>
-                                        <li>sda</li>
-                                        <li>fsd</li>
-                                        <li>dsa</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="panel-steps">
-                                <div class="panel-step">
-                                    <h2>Step. 1</h2>
-                                    <hr>
-                                    <p>One layer of steamed cauliflower</p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 2</h2>
-                                    <hr>
-                                    <p>
-                                        One layer of cooced minced mushrooms with onion and
-                                        paprika
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 3</h2>
-                                    <hr>
-                                    <p>
-                                        One layer of cooced (or steamed) rice.Basmati I use
-                                        here
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 4</h2>
-                                    <hr>
-                                    <p>
-                                        One cup of (vegan) sour cream and cheese goes on
-                                        top.
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 5</h2>
-                                    <hr>
-                                    <p>
-                                        With cheese avoid strong taste otherwise the whole
-                                        dish will taste like your cheese.
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 6</h2>
-                                    <hr>
-                                    <p>
-                                        25 minutes on 180 C or until the surface is golden
-                                        brown
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 7</h2>
-                                    <hr>
-                                    <p>A mincer and some great oyster mushrooms</p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 8</h2>
-                                    <hr>
-                                    <p>minced mushroom</p>
-                                </div>
-                            </div>
+                <div class='col mb-4'>
+                    <div class='card h-100'>
+                        <img src=img/".$row['image']." class='card-img-top' alt='...'>
+                        <div class='card-body'>
+                            <h4 class='card-title text-danger name'>". $row['name']."</h4>
+                            <p class='card-text desc'>". $row['description']."</p>
+                            <h5 class='card-text'>Available from: <i class='fa fa-calendar-o text-danger' aria-hidden='true'></i>". $row['date_from']."</h5>
+                        </div>  
+                        <div class='card-footer text-center p-1'>
+                            <a class='text-info font-weight-bold mr-4' href='update.php?id=".$row['product_id']."'>
+                                <i class='fa fa-info-circle' aria-hidden='true'></i> Product details</a>
                         </div>
                     </div>
                 </div>
+                ";
+            }
 
-                <button class="accordion">
-                    <div class="accordion-preview">
-                        <div class="accordion-preview-tumbnail">
-                            <img src="img/jerkyCover.png" alt="">
-                        </div>
-                        <div class="accordion-preview-text">
-                            <div class="accordion-preview-text-title">
-                                <h1>mushroom jerky</h1>
-                            </div>
-                            <div class="accordion-preview-text-description">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit, sed do eiusmod tempor incididunt ut labore et
-                                    dolore magna aliqua. Lorem ipsum dolor sit amet,
-                                    consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Lorem
-                                    ipsum dolor sit amet, consectetur adipisicing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore
-                                    magna aliqua.
-                                </p>
-                            </div>
-                            <div class="accordion-preview-text-stats">
-                                <p class="time">
-                                    45 mins
-                                </p>
-                                <p class="difficulty">
-                                    Easy
-                                </p>
-                            </div>
-                        </div>
+
+            // Free result set
+            mysqli_free_result($result);
+            // Close connection
+            mysqli_close($conn);
+        ?>
+           <!-- <button class="accordion mx-auto">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img class="card-img h-75" src="img/coverCaulifilower.png" alt="">
                     </div>
-                </button>
-                <div class="panel">
-                    <div class="wrapper-panel">
-                        <div class="panel-needs">
-                            <div class="panel-ingredients">
-                                <div class="panel-ingredients-title">
-                                    <h2>A dish for 34</h2>
-                                </div>
-                                <div class="panel-ingredients-list">
-                                    <ul class="panel-ingredients-left">
-                                        <li>0.25</li>
-                                        <li>50</li>
-                                        <li>20</li>
-                                        <li>120</li>
-                                        <li>1</li>
-                                        <li>3</li>
-                                        <li>2</li>
-                                    </ul>
-                                    <ul class="panel-ingredients-mid">
-                                        <li>kg</li>
-                                        <li>g</li>
-                                        <li>g</li>
-                                        <li>ml</li>
-                                        <li>TL</li>
-                                        <li>TL</li>
-                                        <li>TL</li>
-                                    </ul>
-                                    <ul class="panel-ingredients-right">
-                                        <li>dsa</li>
-                                        <li>dsa</li>
-                                        <li>das</li>
-                                        <li>sda</li>
-                                        <li>fsd</li>
-                                        <li>dsa</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="panel-steps">
-                                <div class="panel-step">
-                                    <h2>Step. 1</h2>
-                                    <hr>
-                                    <p>One layer of steamed cauliflower</p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 2</h2>
-                                    <hr>
-                                    <p>
-                                        One layer of cooced minced mushrooms with onion and
-                                        paprika
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 3</h2>
-                                    <hr>
-                                    <p>
-                                        One layer of cooced (or steamed) rice.Basmati I use
-                                        here
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 4</h2>
-                                    <hr>
-                                    <p>
-                                        One cup of (vegan) sour cream and cheese goes on
-                                        top.
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 5</h2>
-                                    <hr>
-                                    <p>
-                                        With cheese avoid strong taste otherwise the whole
-                                        dish will taste like your cheese.
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 6</h2>
-                                    <hr>
-                                    <p>
-                                        25 minutes on 180 C or until the surface is golden
-                                        brown
-                                    </p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 7</h2>
-                                    <hr>
-                                    <p>A mincer and some great oyster mushrooms</p>
-                                </div>
-                                <div class="panel-step">
-                                    <h2>Step. 8</h2>
-                                    <hr>
-                                    <p>minced mushroom</p>
-                                </div>
-                            </div>
+                    <div class="col-sm-8">
+                        <h1 class="mb-4">Cauliflower &amp; Mushroom</h1>
+                        <p class="p-3">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Lorem
+                            ipsum dolor sit amet, consectetur adipisicing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua.
+                        </p>
+                        
+                        <div class="accordion-preview-text-stats">
+                            <span>⏱️ 1 hour 40 mins</span>
+                            <span>📜 Hard</span>
                         </div>
                     </div>
                 </div>
-            </div>
+            </button>
+            <div class="row">
+                <div class="col-sm-8">
+                    <?php 
+                        /*for($i = 1 ; $i<count(result_steps); $i++)
+                        echo '<h2>Step. </h2>'.$i;
+                        echo '<hr>';
+                        echo rowsepts['<p>description</p>'];*/
+                    ?>
+                </div>  
+                <div class="col-sm-4">
+                    <div class="panel-ingredients-title-dish">
+                        <h2 class="border border-bottom-warning">- a dish for 3 +</h2>
+                    </div>
+                    <hr>
+                    <div class="panel-ingredients-list">
+                       
+                        <ul class="panel-ingredients-left">
+                            <li>0.2</li>
+                            <li>50</li>
+                            <li>20</li>
+                            <li>120</li>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>2</li>
+                        </ul>
+                        <ul class="panel-ingredients-mid">
+                            <li>kg</li>
+                            <li>g</li>
+                            <li>g</li>
+                            <li>ml</li>
+                            <li>TL</li>
+                            <li>TL</li>
+                            <li>TL</li>
+                        </ul>
+                        <ul class="panel-ingredients-right">
+                            <li>Cauliflower</li>
+                            <li>Minced Mushroom</li>
+                            <li>Oyster Mushroom</li>
+                            <li>Onion</li>
+                            <li>Paprika</li>
+                            <li>Sour Cream</li>
+                            <li>Cheese</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>        
         </div>
-    </div>
-</main>
-<!-- Main Content -->
+    </div>-->
 
-<!-- Modal Contact -->
-<div class="modal-contact modal-contact--hidden">
-    <div class="modal-contents">
-        <div class="modal-close-bar">
-              <span class="modal-close-bar-x">
-                X
-              </span>
-        </div>
-        <div class="modal-logo-over">
-            <div class="wrapper-modal-logo">
-                <img class="modal-logo" src="img/logo-body.png" alt="">
-                <img class="modal-logo" src="img/logo-arrow.png" alt="">
-            </div>
-        </div>
-        <div>
-            <h1>
-                Get in touch!
-            </h1>
-        </div>
-        <div class="wrapper-form">
-            <form class="form-label" id="contact-modal">
-                <div class="form-animated">
-                    <input class="form-bg" type="text" name="name" autocomplete="off" required="">
-                    <label for="name" class="label-name">
-                        <span class="content-name">Name</span>
-                    </label>
-                </div>
-                <div class="form-animated">
-                    <input class="form-bg" type="email" name="email" autocomplete="off" required="">
-                    <label for="email" class="label-name">
-                        <span class="content-name">Email</span>
-                    </label>
-                </div>
-                <div class="form-animated">
-                    <input class="form-bg" type="text" name="text" autocomplete="off" required="">
-                    <label for="name" class="label-name">
-                        <span class="content-name">Enter Message</span>
-                    </label>
-                </div>
-                <button class="form-button" type="submit">
-                    Submit
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- Modal Contact -->
+    <!-- Main Content -->
 
-<!-- Mobile Navbar -->
-<nav class="wrapper-mobile-nav">
-    <div class="mobile-nav-links navbar">
-        <div class="mobile-nav-link">
-            <div class="mobile-nav-dropup">
-                <div class="mobile-nav-dropbtn">
-                    More
-                </div>
-                <div class="mobile-nav-dropup-content left-drop">
-                    <a href="aboutme.php">about me</a>
-                    <a href="recipes.php">recipes</a>
-                </div>
-            </div>
-        </div>
-        <a class="mobile-nav-link" href="index.html">
-            <div class="mobile-nav-link-text">
-                <p class="">Home</p>
-            </div>
-        </a>
-        <div class="mobile-nav-link">
-            <div class="mobile-nav-dropup">
-                <div class="mobile-nav-dropbtn">
-                    contact
-                </div>
-                <div class="mobile-nav-dropup-content right-drop">
-                    <a href="tel:+43-664-564-40-86">call me</a>
-                    <a href="https://goo.gl/maps/ekBkVFXtCscuXGCv8" target="_blank">
-                        route</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- Mobile Navbar -->
+    <!-- Modal Contact -->
+    <?php include 'contact.php'; ?>
 
-<!-- Footer -->
-<footer class="wrapper-footer">
-    <div class="footer-header">
-        <!-- Just a Color -->
-    </div>
-    <div class="footer-body">
-        <div class="footer-body-up">
-            <div class="footer-body-row">
-                <h5 class="footer-title">social media</h5>
-                <hr class="footer-title-underline">
-                <div class="footer-body-links">
-                    <p class="footer-text fire">
-                        <a class="footer-link" target="_blank" href="https://www.facebook.com/LaGomba-103065104591559">Facebook</a>
-                    </p>
-                </div>
-            </div>
-            <div class="footer-body-row">
-                <h5 class="footer-title">products</h5>
-                <hr class="footer-title-underline">
-                <div class="footer-body-links">
-                    <p class="footer-text mushroom">
-                        <a class="footer-link" href="index.php">Mushrooms</a>
-                    </p>
-                    <p class="footer-text bulb">
-                        <a class="footer-link" href="aboutme.php">About me</a>
-                    </p>
-                    <p class="footer-text scroll">
-                        <a class="footer-link" href="recipes.php">Recipes</a>
-                    </p>
-                </div>
-            </div>
-            <div class="footer-body-row">
-                <h5 class="footer-title">contact</h5>
-                <hr class="footer-title-underline">
-                <div class="footer-body-links">
-                    <p class="footer-text">
-                        Markhofgasse 19
-                    </p>
-                    <p class="footer-text">
-                        Wien | 1030
-                    </p>
 
-                    <p class="footer-text">
-                        <a class="footer-link" href="mailto:rr.noar@gmail.com">rr.noar@gmail.com</a>
-                    </p>
-                    <p class="footer-text"></p>
-                </div>
-            </div>
-        </div>
-        <div class="footer-body-down">
-            <div class="footer-body-row">
-                <h5 class="footer-title">lagomba</h5>
-                <hr class="footer-title-underline">
-                <div class="footer-body-links">
-                    <iframe class="footer-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2659.6938790047197!2d16.406720115529684!3d48.19324935526099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d075b1edff245%3A0xaef7a8ddf96bc82d!2sMarkhofgasse%2019%2C%201030%20Wien!5e0!3m2!1sde!2sat!4v1593439331736!5m2!1sde!2sat" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="copyright-container">
-            <p class="copyright-container-text footer-text">
-                © 2020 Copyright
-                <a class="copyright-container-link footer-link" href="index.html">
-                    LaGomba
-                </a>
-            </p>
-        </div>
-    </div>
-</footer>
-<!-- Footer -->
-
+    <!-- Footer -->
+    <?php include 'footer.php'; ?>
 
 
 
 </body></html>
+
+<?php ob_end_flush(); ?>

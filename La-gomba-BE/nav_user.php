@@ -1,40 +1,41 @@
-<!-- Main Navbar -->
-  <nav id="navbar" class="wrapper-nav">
-    <div class="nav-links">
-      <div class="nav-left">
-        <a href="index.php" class="wrapper-logo">
-          <img class="logo-nav" src="img/logo-body.png" alt="">
-          <img class="logo-nav" src="img/logo-arrow.png" alt="">
-        </a>
-      </div>
-      <div class="nav-right">
-        <a class="nav-link" href="index.php">
-          <p><b>home</b></p>
-        </a>
-        <a class="nav-link" href="product.php">
-          <p><b>products</b></p>
-        </a>
-        <a class="nav-link" href="recipes.php">
-          <p><b>recipes</b></p>
-        </a>
-        <a class="nav-link" href="aboutme.php">
-          <p><b>about me</b></p>
-        </a>
-        <a class="nav-link" id="contact-show">
-          <p><b>contact</b></p>
-        </a>
-        <?php
-        if(!isset($_SESSION['user'])) {
-            echo '<div class="nav-link-contact">
-                  <p><a href="login.php"><b>login</b></a></p>
-                </div>';
-        } else {
-          echo '<a class="nav-link" href="logout.php?logout" >
-                  <p><b>log out</b></p>
-                </a>';
-        }
-        ?>
-      </div>
+<nav class="navbar navbar-expand-sm navbar-dark bgg1 sticky">
+    <div class="navbar-brand ml-4">
+        <img class="img-fluid" src="img/LaGomba.png" alt="">
     </div>
-  </nav>
-  <!-- Main Navbar -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto ">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="index.php">HOME </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="products.php">PRODUCTS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="recipes.php">RECIPES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="aboutme.php">ABOUT ME</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">CONTACT</a>
+            </li>
+        </ul>
+        
+    </div>
+    <span class="ml-auto text-white mr-3 font-weight-bold">
+          <?php if (isset($_SESSION['user'])) {
+                    echo 'Hi'.$userRow['userName']; 
+                }
+            ?> 
+    </span>
+    <?php
+        if(!isset($_SESSION['admin'])) {
+            echo '<a href="login.php" class="nav-link font-weight-bold btn btn-outline-warning">Login</a>';
+        } else {
+            echo '<a href="logout.php?logout" class="nav-link font-weight-bold btn btn-outline-warning">Log out</a>';  
+        }
+    ?>
+</nav>    

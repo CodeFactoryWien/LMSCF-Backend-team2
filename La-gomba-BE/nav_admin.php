@@ -1,36 +1,37 @@
-<!-- Main Navbar -->
-<nav id="navbar" class="wrapper-nav">
-  <div class="nav-links">
-    <div class="nav-left">
-      <a href="index.php" class="wrapper-logo">
-        <img class="logo-nav" src="img/logo-body.png" alt="">
-        <img class="logo-nav" src="img/logo-arrow.png" alt="">
-      </a>
+<nav class="navbar navbar-expand-sm navbar-dark bgg1">
+    <div class="navbar-brand ml-4">
+        <img class="img-fluid" src="img/LaGomba.png" alt="">
     </div>
-    <div class="nav-right">
-      <a class="nav-link" href="product.php">
-        <p><b>products</b></p>
-      </a>
-      <a class="nav-link" href="create_product.php">
-        <p><b>new products</b></p>
-      </a>
-      <a class="nav-link" href="recipes.php">
-        <p><b>recipes</b></p>
-      </a>
-      <a class="nav-link" href="create_recipe.php">
-        <p><b>new recipe</b></p>
-      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="products.php">PRODUCTS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="create_product.php">NEW PRODUCT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="recipes.php">RECIPES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="create_recipe.php">NEW RECIPE</a>
+            </li>
+        </ul>
     </div>
+    <span class="ml-auto text-white mr-3 ">
+          <?php if (isset($_SESSION['admin'])) {
+                    echo 'Hi '.$userRow['userName']; 
+                }
+            ?> 
+    </span>
     <?php
-      if(!isset($_SESSION['admin'])) {
-          echo '<div class="nav-link-contact">
-                <p><a href="login.php"><b>login</b></a></p>
-              </div>';
-      } else {
-        echo '<div class="nav-link-contact">
-                <p><a href="logout.php?logout"><b>logout</b></a></p>
-              </div>';  
-      }
+        if(!isset($_SESSION['admin'])) {
+            echo '<a href="login.php" class="nav-link font-weight-bold btn btn-outline-warning">Login</a>';
+        } else {
+            echo '<a href="logout.php?logout" class="nav-link font-weight-bold btn btn-outline-warning">Log out</a>';  
+        }
     ?>
-  </div>
 </nav>

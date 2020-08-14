@@ -32,62 +32,94 @@
 </head>
 <body class="main">
 
-    <!-- Main Navbar -->
-    <nav id="navbar" class="wrapper-nav">
-        <div class="nav-links">
-            <div class="nav-left">
-                <a href="index.php" class="wrapper-logo">
-                  <img class="logo-nav" src="img/logo-body.png" alt="">
-                  <img class="logo-nav" src="img/logo-arrow.png" alt="">
-                </a>
-            </div>
-            <div class="nav-right">
-                <a class="nav-link" href="../product.php">
-                  <p><b>products</b></p>
-                </a>
-                <a class="nav-link" href="../create_product.php">
-                  <p><b>new products</b></p>
-                </a>
-                <a class="nav-link" href="../recipes.php">
-                  <p><b>recipes</b></p>
-                </a>
-                <a class="nav-link" href="../create_recipe.php">
-                  <p><b>new recepie</b></p>
-                </a>
-                <?php
-                if(!isset($_SESSION['admin'])) {
-                    echo '<div class="nav-link-contact">
-                          <p><a href="login.php"><b>login</b></a></p>
-                        </div>';
-                } else {
-                  echo '<a class="nav-link" href="logout.php?logout" >
-                          <p><b>log out</b></p>
-                        </a>';
-                }
-                ?>
-            </div>
-        </div>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="nav-left">
+          <a class="wrapper-logo" href="index.php">
+              <img class="logo-nav" src="img/logo-body.png" alt="">
+              <img class="logo-nav" src="img/logo-arrow.png" alt="">
+          </a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="index.php">HOME </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="recipes.php">RECIPES</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Products
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="create_product.php">Add new product</a>
+                  </div>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Recipes
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="create_recipe.php">Add new recipe</a>
+                  </div>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="aboutme.php">ABOUT ME</a>
+              </li>
+          </ul>
+          <?php
+              if(!isset($_SESSION['admin'])) {
+                  echo '<a href="login.php" class="nav-link  btn btn-outline-warning">login</a>';
+              } else {
+                  echo '<a href="logout.php?logout" class="nav-link  btn btn-outline-warning">logout</a>';  
+              }
+          ?>
+      </div>
     </nav>
   	
     <div class="container mt-4 mx-auto text-center">
 		<?php
 			// Escape user inputs for security
 			$name = mysqli_real_escape_string($conn, $_POST['name']);
-			$image = mysqli_real_escape_string($conn, $_POST['image']);
-			$location = mysqli_real_escape_string($conn, $_POST['location']);
+			$time = mysqli_real_escape_string($conn, $_POST['time']);
 			$description = mysqli_real_escape_string($conn, $_POST['description']);
-			$age = mysqli_real_escape_string($conn, $_POST['age']);
-			$type = mysqli_real_escape_string($conn, $_POST['type']);
-			$hobbies = mysqli_real_escape_string($conn, $_POST['hobbies']);
+			$image = mysqli_real_escape_string($conn, $_POST['image']);
+			$difficulty = mysqli_real_escape_string($conn, $_POST['difficulty']);
 
 			// attempt insert query execution
-			$sql = "INSERT INTO animals 
-			(name, image, location, age, description, type, hobbies) 
-			VALUES 
-			('$name', '$image', '$location', '$age', '$description', '$type', '$hobbies')";
-			
+			$sql = "INSERT INTO recipes (name, time, description, difficulty, image) VALUES ('$name', '$time', '$description', '$difficulty', '$image')";
+      
+
 			if (mysqli_query($conn, $sql)) {
-			    echo "<h1 class='text-white'>New pet created.<h1>";
+          $last_id_recipe = $conn->insert_id;
+          foreach($_POST['recipes_description'] as $field)
+          {
+              if($field !== '')
+              {
+                $sql = "INSERT INTO recipe_steps (recipe_id, description) VALUES ('$last_id_recipe', '$field')";
+                  if (!mysqli_query($conn, $sql)) {
+                    die('Invalid query: ' . mysql_error());
+                  }
+              }
+          }
+
+          for($i = 0 ; $i < count($_POST['ing_amount']); $i++)
+          {
+              if($_POST['ing_amount'][$i] !== '' && $_POST['ing_unit'][$i] !== '' && $_POST['ing_description'][$i] !== '')
+              {
+                $amount = $_POST['ing_amount'][$i];
+                $unit = $_POST['ing_unit'][$i];
+                $description = $_POST['ing_description'][$i];
+                $sql = "INSERT INTO recipe_ingredients (recipe_id, amount, unit, description) VALUES ('$last_id_recipe', '$amount', '$unit', '$description')";
+                  if (!mysqli_query($conn, $sql)) {
+                    die('Invalid query: ' . mysql_error());
+                  }
+              }
+          }
+			    echo "<h1 class='text-white'>New recipe created.<h1>";
 			    header("Refresh: 3; url= ../admin.php");
 			} else {
 			    echo "<h1 class='text-red'>Something went wrong, please try again: </h1>" .
