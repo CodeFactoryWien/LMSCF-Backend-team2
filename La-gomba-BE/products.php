@@ -38,15 +38,16 @@
                 echo "
                 <div class='col mb-4'>
                     <div class='card h-100'>
-                        <img src=img/".$row['image']." class='card-img-top' alt='...'>
+                        <img src=img/".$row['image']." class='card-img-top' alt='". $row['name']."'>
                         <div class='card-body'>
                             <h4 class='card-title text-danger name'>". $row['name']."</h4>
-                            <p class='card-text desc'>". $row['description']."</p>
+                            <h5>". $row['quality']."<h5>
+                            <h5>". $row['amount']." for € ". $row['price'].".-<h5>
                             <h5 class='card-text'>Available from: <i class='fa fa-calendar-o text-danger' aria-hidden='true'></i>". $row['date_from']."</h5>
                         </div>  
                         <div class='card-footer text-center p-1'>
-                            <a class='text-info font-weight-bold mr-4' href='update.php?id=".$row['product_id']."'>
-                                <i class='fa fa-info-circle' aria-hidden='true'></i> Product details</a>
+                            <a class='text-info font-weight-bold mr-4' href='update.php?id=".$row['product_id']."'></a>
+                            <a href='product_detail.php?id=".$row['product_id']."'><i class='fa fa-info-circle' aria-hidden='true'></i> Product details</a>
                         </div>
                     </div>
                 </div>
