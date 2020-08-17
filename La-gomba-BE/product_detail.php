@@ -17,6 +17,11 @@
         $sql = "SELECT * FROM products WHERE product_id = {$id}";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
+
+        $sqlSales = "SELECT IFNULL(sum(amount),0) as total FROM payments WHERE product_id = {$id}";
+        $resultSales = $conn->query($sqlSales);
+        $rowSales = $resultSales->fetch_assoc();
+        //echo $rowSales['total'];
         
 ?>
 <!DOCTYPE html>
@@ -39,48 +44,49 @@
 
     <!-- Main Content -->
     <div  class="container-fluid mx-auto my-4 px-4">
-    
-    <section>
-        <div class="row my-5">
-            
-            <img src="<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5" >
-           
+	    <section>
+	        <div class="row my-5">
+	            <img src="<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5" >
+	            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 py-3 pl-3 pr-5">
+	                <?php echo "
+                    <h4 class='text-danger'>For now delivery is only possible in Vienna (Or pick-up at our cellar)</h4>
+	                <h2><b> ". $row['name']."</b></h2>
+	                    <h4><b>Quality ".$row['quality']."</b></h4>
+	                    <p class='pr-4'>".$row['description']."</p>
+	                    <p><b>What is ".$row['quality']."?</b><br>
+	                    ".$row['qualityDescription']."</p>
+	                    <p><b>Next Harvest: </b><i class='fa fa-calendar-check-o' aria-hidden='true'></i> ".$row['date_from']."<br>
+	                    <b>Requires delivery by </b> ".$row['date_to']."</p>
+						<b>Stock: ".($row['amount']-$rowSales['total']) ."<br>
+	                    <p><b>Get 1 Kg for € ".$row['price'].".</b></p>  
+	                ";?>
+	  					<!-- list.php?action=addcart -->
+	                <form action="" method="post">
+	                    <input class="" type="number" name="quantity" id="quantity" value="1" min="1" max="<?=($row['amount']-$rowSales['total'])?>" placeholder="Quantity" required>
+	                    <select class="custom-select w-25" id="inputGroupSelect01" name="unit">
+	                        <option value="kg">Kg</option>
+	                    </select>
+	                    <input type="hidden" id="product_id" name="product_id" value="<?=$row['product_id']?>">
+	                    <input id="addcart" type="submit" value="Add To Cart" class="new btn btn-warning">
+	                </form>
+	            </div>
+	        </div>
+	    </section>
 
-            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 py-3 pl-3 pr-5">
-                <?php echo "
-                <h2><b> ". $row['name']."</b></h2>
-                    <h4><b>".$row['quality']."</b></h4>
-                    <p class='pr-4'>".$row['description']."</p>
-                    <p><b>What is ".$row['quality']."?</b><br>
-                    ".$row['qualityDescription']."</p>
-                    <p><b>Next Harvest: </b> ".$row['date_from']."<br>
-                    <b>Requires delivery by </b> ".$row['date_to']."</p>
+	    
+	        <?php
+	            // Free result set
+	            mysqli_free_result($result);
+	            // Close connection
+	            mysqli_close($conn);
+	        ?>
 
-                    <p><b>Get ".$row['amount']." for €".$row['price'].".-</b></p>
-                    
-                ";?>
-  <!-- list.php?action=addcart -->
-                <form action="" method="post">
-                    <input type="number" name="quantity" id="quantity" value="1" min="1" max="<?=$row['amount']?>" placeholder="Quantity" required>
-                    <select class="custom-select w-25" id="inputGroupSelect01" name="unit">
-                        <option value="kg">Kg</option>
-                    </select>
-                    <input type="hidden" id="product_id" name="product_id" value="<?=$row['product_id']?>">
-                    <input id="addcart" type="submit" value="Add To Cart" class="btn btn-warning">
-                </form>
-            </div>
-        </div>
-    </section>
-
-    
-        <?php
-            // Free result set
-            mysqli_free_result($result);
-            // Close connection
-            mysqli_close($conn);
-        ?>
+	<a href="products.php" class="font-weight-bold text-dark back">
+    <i class="fa fa-arrow-circle-o-left back" aria-hidden="true"></i>Back</a>
     </div>
-    <!-- Main Content -->
+	<!-- Main Content -->
+
+	
 
 
     <!-- Footer -->

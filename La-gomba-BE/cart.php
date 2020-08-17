@@ -75,13 +75,13 @@
     <!-- Main Content -->
     <div class="container mx-auto font-weight-bold mt-2 py-3">
         <?php if(!empty($_SESSION['products'])) { ?>
-        <nav class="navbar navbar-inverse" style="background:#04B745;">
+        <nav class="navbar navbar-inverse bg-warning" style="background:#04B745;">
 		    <div class="container-fluid pull-left" style="width:300px;">
 		      <div class="navbar-header"> <a class="navbar-brand" href="#" style="color:#FFFFFF;">Shopping Cart</a> </div>
 		    </div>
-		    <div class="pull-right" style="margin-top:7px;margin-right:7px;"><a href="list.php?action=emptyall" class="btn btn-info">Empty cart</a></div>
+		    <div class="pull-right" style="margin-top:7px;margin-right:7px;"><a href="cart.php?action=emptyall" class="btn btn-dark">Empty cart</a></div>
         </nav>
-        <table class="table table-striped">
+        <table class="table table-striped bg-white">
 		    <thead>
 		      <tr>
 		        <th>Image</th>
@@ -93,14 +93,15 @@
 		    </thead>
             
 		    <?php foreach($_SESSION['products'] as $key=>$product):?>
-                <input type="hidden" value="<?php print $key?>" name="ids[]">
+                <input type="hidden" value="<?php print $key;?>" name="ids[]">
+                <input type="hidden" value="<?php print $product['qty'];?>" name="amounts[]">
             
     		    <tr>
     		      <td><img src="<?php print $product['image']?>" width="50"></td>
     		      <td><?php print $product['name']?></td>
     		      <td>$<?php print $product['price']?></td>
     		      <td><?php print $product['qty']?></td>
-                  <td><a href="list.php?action=empty&product_id=<?php print $key?>" class="btn btn-info">Delete</a></td>
+                  <td><a href="cart.php?action=empty&product_id=<?php print $key?>" class="btn btn-danger">Delete</a></td>
     		    </tr>
     		    <?php $total = $total+($product['price']*$product['qty']);?>
     		    <?php endforeach;?>
@@ -110,7 +111,7 @@
 		  
         <div id="paypal-button"></div>
         
-    <?php } else { echo '<p class="text-center">The card is empty!</p>'; } ?>
+    <?php } else { echo '<h1 class="text-center"><b>The card is empty!<b></h1>'; } ?>
     </div>
 
     <!-- Footer -->
@@ -122,7 +123,7 @@
 <?php ob_end_flush(); ?>
 
 <script>
- const elementExists = !!document.getElementById('paypal-button');
+const elementExists = !!document.getElementById('paypal-button');
 if (elementExists) {
     paypal.Button.render({
         // Configure environment
@@ -155,10 +156,19 @@ if (elementExists) {
             .then(function () {
                 let products = $("input[name='ids[]']").map(function(){return $(this).val();}).get();
                 let pid = products.join(',')
-                $.get('actions/process.php', { paymentID: data.paymentID,token: data.paymentToken, payerID: data.payerID, pid: pid}, function(response) {
+                console.log(pid +'ok')
+                let amounts = $("input[name='amounts[]']").map(function(){return $(this).val();}).get();
+                let pamounts = amounts.join(',')
+                console.log(pamounts +'ok')
+                $.get('actions/process.php', { paymentID: data.paymentID,token: data.paymentToken, payerID: data.payerID, pid: pid, pamounts: pamounts}, function(response) {
                     if (response) {
-                        alert("Thank you for your purchase!")
-                        setTimeout("window.location='list.php'", 1000);
+                        console.log('res', response)
+                        Swal.fire(
+                          'Thank you!',
+                          'Thank you for your purchase!',
+                          'success'
+                        )
+                        setTimeout("window.location='cart.php'", 3000);
                     }
                 });
             });

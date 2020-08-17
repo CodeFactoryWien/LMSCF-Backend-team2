@@ -41,17 +41,20 @@
                     <div class='card h-100'>
                         <img src=".$row['image']." class='card-img-top' alt='...'>
                         <div class='card-body'>
-                            <h4 class='card-title text-danger name'>". $row['name']."</h4>
-                            <p class='card-text desc'>". $row['description']."</p>
-                            <h5 class='card-text'>Available from: <i class='fa fa-calendar-o text-danger' aria-hidden='true'></i>". $row['date_from']."</h5>
+                            <h3 class='card-title text-warning'>". $row['name']."</h3>
+                            <h5 class='card-text'>Quality " . $row['quality']."</h5>
+                            <h5 class='card-text'>Price ". $row['price']."<i class='fa fa-eur' aria-hidden='true'></i> for 1Kg</h5>
+                            
                         </div>  
                         <div class='card-footer link text-center p-1'>
-                        <a class='text-info font-weight-bold mr-4' href='product_detail.php?id=".$row['product_id']."'>
+                        <a class='text-info font-weight-bold mr-3' href='product_detail.php?id=".$row['product_id']."'>
                         <i class='fa fa-info-circle' aria-hidden='true'></i> View Product</a>";
                             if(isset($_SESSION['admin'])) {
                                 echo '
-                                <a href="update_product.php?id='.$row['product_id'].'" class="font-weight-bold text-warning">Update</a>
-                                <a href="delete_product.php?id='.$row['product_id'].'" class="font-weight-bold text-danger">Delete</a>
+                                <a href="update_product.php?id='.$row['product_id'].'" class="font-weight-bold text-warning mr-3">
+                                <i class="fa fa-pencil-square" aria-hidden="true"></i>Update</a>
+                                <a href="delete_product.php?id='.$row['product_id'].'" class="font-weight-bold text-danger ">
+                                <i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
                                 ';
                             } 
                              echo '          

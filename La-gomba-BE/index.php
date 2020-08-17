@@ -32,7 +32,10 @@
   
     <!-- Main Content -->
     <div class="container mx-auto my-4">
-        <div class="container main mx-auto my-5 p-4">
+        <div class="container main mx-auto my-4 p-4 Main">
+            <div class="text-center mx-auto mb-4">
+                <img class="img-fluid logo1" src="img/LaGomba_logo_transparent_bg.png" alt="">
+            </div>
             <h1 class="text-center font-weight-bold mb-4">
                 About the mushroom
             </h1>
@@ -45,7 +48,7 @@
             </p>
             <h3 class="font-weight-bold mb-2">
                 1. They have cancer-fighting properties.
-            </h2>
+            </h3>
             <p class="p-3">
                 A study published in the journal Experimental Biology and Medicine
                 tested five types of mushrooms (maitake, crimini, portabella,

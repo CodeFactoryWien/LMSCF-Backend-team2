@@ -14,8 +14,8 @@ if(!empty($_GET['paymentID']) && !empty($_GET['token']) && !empty($_GET['payerID
     $paymentID = $_GET['paymentID']; 
     $token = $_GET['token']; 
     $payerID = $_GET['payerID']; 
-    $productIDs = explode(",",$_GET['pid']); 
-     
+    $productIDs = explode(",",$_GET['pid']);
+    $productAmounts = explode(",",$_GET['pamounts']); 
     // Validate transaction via PayPal API 
     $paymentCheck = $paypal->validate($paymentID, $token, $payerID, $productID); 
      
@@ -35,8 +35,9 @@ if(!empty($_GET['paymentID']) && !empty($_GET['token']) && !empty($_GET['payerID
         $currency = $paymentCheck->transactions[0]->amount->currency; 
      	
      	for($i = 0; $i< count($productIDs); $i++)  {
-	        // Get product details
+            // Get product details
 	        $productID = $productIDs[$i];
+            $productAmount = $productAmounts[$i];
 	        $conditions = array( 
 	            'where' => array('product_id ' => $productID), 
 	            'return_type' => 'single' 
@@ -44,11 +45,12 @@ if(!empty($_GET['paymentID']) && !empty($_GET['token']) && !empty($_GET['payerID
 	        $productData = $db->getRows('products', $conditions); 
 	         
 	        // If payment price is valid 
-	        if($productData['price'] >= $paidAmount){ 
+	        //if($productData['price'] >= $paidAmount){ 
 	             
 	            // Insert transaction data in the database 
 	            $data = array( 
-	                'product_id' => $productID, 
+	                'product_id' => $productID,
+                    'amount' => $productAmount, 
 	                'txn_id' => $id, 
 	                'payment_gross' => $paidAmount, 
 	                'currency_code' => $currency, 
@@ -61,7 +63,7 @@ if(!empty($_GET['paymentID']) && !empty($_GET['token']) && !empty($_GET['payerID
 	            $insert = $db->insert('payments', $data); 
 	            // Add insert id to the URL 
 	            //$redirectStr = '?id='.$insert; 
-	        }
+	        //}
         }
         unset($_SESSION['products']); 
         echo 'Success';
