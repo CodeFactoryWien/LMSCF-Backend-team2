@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <?php include 'head.php'; ?>
-    <script defer="" src="js/main.js"></script>
+    
 <body>
     <!-- Header -->
     <?php include 'header.php'; ?>
@@ -106,3 +106,5 @@
 </body></html>
 
 <?php ob_end_flush(); ?>
+
+<script src="js/main.js"></script>

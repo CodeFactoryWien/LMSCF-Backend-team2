@@ -1,12 +1,12 @@
-<nav class="navbar navbar-expand-sm navbar-dark bgg1 sticky">
-    <div class="navbar-brand ml-4">
-        <img class="img-fluid" src="img/LaGomba.png" alt="">
+<nav class="navbar navbar-expand-sm navbar-dark bgg1">
+    <div class="navbar-brand ">
+        <img class="img-fluid logo" src="img/LaGomba.png" alt="">
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-auto ">
+        <ul class="navbar-nav mx-auto">
             <li class="nav-item">
                 <a class="nav-link text-white" href="index.php">HOME </a>
             </li>
@@ -20,22 +20,27 @@
                 <a class="nav-link text-white" href="aboutme.php">ABOUT ME</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">CONTACT</a>
+                <a class="nav-link text-white" id="contactButton">CONTACT</a>
             </li>
         </ul>
-        
     </div>
     <span class="ml-auto text-white mr-3 font-weight-bold">
           <?php if (isset($_SESSION['user'])) {
-                    echo 'Hi'.$userRow['userName']; 
+                    echo 'Hi '.$userRow['userName']; 
                 }
             ?> 
     </span>
     <?php
-        if(!isset($_SESSION['admin'])) {
-            echo '<a href="login.php" class="nav-link font-weight-bold btn btn-outline-warning">Login</a>';
+        if(!isset($_SESSION['user'])) {
+            echo '<a href="login.php" class="nav-link font-weight-bold btn btn-outline-warning">Login</a>
+                <a class="nav-link font-weight-bold btn btn-outline-warning" href="list.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            ';
         } else {
-            echo '<a href="logout.php?logout" class="nav-link font-weight-bold btn btn-outline-warning">Log out</a>';  
+            echo '<a href="logout.php?logout" class="nav-link font-weight-bold btn btn-outline-warning ">Log out</a>
+            <a class="nav-link font-weight-bold btn btn-outline-warning ml-1" href="list.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>';  
         }
     ?>
-</nav>    
+</nav>
+<script>
+
+</script>

@@ -1,96 +1,172 @@
 * {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
   font-family: "Roboto", sans-serif;
 }
 
 body {
-  background: radial-gradient(circle, rgba(235,227,195,1) 10%, rgba(254,242,187,1) 83%);
+    background: radial-gradient(circle, rgba(235,227,195,1) 10%, rgba(254,242,187,1) 83%);
+    margin: 0;
+    min-width: fit-content;
+    padding:0;
+}
+
+.paypal {
+    text-align: right;
+    padding-bottom: 40px;
+}
+.paypal button {
+    display: inline-block;
+    padding: 10px 20px 7px 20px;
+    background-color: #FFC439;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    width: 215px;
+}
+.paypal button:hover {
+    background-color: #f3bb37;
 }
 
 .jumbotron {
-  background-image: url('../img/IMG_9121.JPG');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 70vh;
+    background-image: url('../img/IMG_9121.JPG');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 70vh;
 }
 
 .jumbotron h1 {
-  font-size: 8rem!important;
-  margin-left: 10%
+    font-size: 8rem!important;
+    margin-left: 10%
 }
 .jumbotron p {
-  font-size: 3rem!important;
-  margin-left: 10%
+    font-size: 3rem!important;
+    margin-left: 10%
 }
 
 .bgg1 {
-  background-color: black!important;
-  border-top: 7px solid yellow;
-  height: 11vh;
+    background-color: black!important;
+    border-top: 7px solid yellow;
 }
 
 .bgg {
-  background-color: black!important;
-  border-top: 14px solid yellow!important;
+    background-color: black!important;
+    border-top: 14px solid yellow!important;
 }
 
 .navbar-nav a {
-  font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 
 .navbar-nav a:hover {
-  color: yellow!important;
+    color: yellow!important;
 }
 
 a {
-  text-decoration: none!important;
+    text-decoration: none!important;
 }
 
-.img-fluid {
-  width: 15vw;
-  
+.logo {
+    width: 12vw;
 }
 
 .main p {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
 a {
-  text-decoration: none;
-  color: currentColor;
+    text-decoration: none;
+    color: currentColor;
 }
 
-.accordion {
-  height: 47vh!important;
+.sticky {
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    z-index: 1;
 }
 
-.stick {
-  position: fixed;
-  top: 0%;
-  width: 100%;
-  -webkit-transition: 1s ease-in-out;
-  transition: 1s ease-in-out;
+.active {
+    background-color: black;
+    color: white;
 }
 
-@media(max-width: 760px) {
-  .jumbotron h1 {
-    font-size: 4.4rem!important;  
-  }
+.active img {
+    width: 100%;
+}
 
-  .jumbotron p {
-    font-size: 1.8rem!important;
-  }
+.end {
+    font-size: 1.4rem;
+}
+
+.end:hover {
+    transform: scale(1.2);
+}
+  
+.end {
+    transition: all 0.4s;
+}
+
+.link {
+    font-size: 1.2rem;
+}
+
+@media(max-width: 660px) {
+    .jumbotron h1 {
+        font-size: 4.4rem!important;  
+    }
+
+    .jumbotron p {
+        font-size: 1.8rem!important;
+    }
 
   
-  .navbar-nav a {
-    font-size: 1.2rem;
-  }
+    .navbar-nav a {
+        font-size: 0.7rem;
+    }
+
+    .logo {
+        width: 24vw;
+    }
+
+    .sticky {
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .title h5 {
+        font-size: 0.8rem!important;
+    }
+
+    .title p {
+        font-size: 0.7rem!important;
+    }
+
 
 }
 
+@media(min-width: 661px) and (max-width: 1000px) {
+    .jumbotron h1 {
+        font-size: 4.4rem!important;  
+    }
 
+    .jumbotron p {
+        font-size: 1.8rem!important;
+    }
 
+    .navbar-nav a {
+        font-size: 0.9rem;
+    }
+
+    .logo {
+        width: 18vw;
+    }
+
+    .sticky {
+        position: fixed;
+        top: 0%;
+        width: 100%;
+        z-index: 1;
+    }
+}

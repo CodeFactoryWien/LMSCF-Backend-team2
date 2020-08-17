@@ -3,9 +3,13 @@
     session_start();
     require_once 'actions/db_connect.php';
 
-    if( isset($_SESSION['admin']) && isset($_SESSION['user']) ) {
+    if (isset($_SESSION['user'])) {
         // select logged-in users details
         $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+        $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+    } else if(isset($_SESSION['admin'])) {
+        // select logged-in users details
+        $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['admin']);
         $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
     }
   
@@ -13,9 +17,6 @@
 <!DOCTYPE html>
 <html>
 <?php include 'head.php'; ?>
-    <!-- JavaScript -->
-    <script defer="" src="js/main.js"></script>
-
 <body>
     <!-- Header -->
     <?php include 'header.php'; ?>
@@ -123,7 +124,6 @@
     <?php include 'contact.php'; ?>
    
 
-  
     <!-- Footer -->
     <?php include 'footer.php'; ?>
 
@@ -131,3 +131,6 @@
 </body></html>
 
 <?php ob_end_flush(); ?>
+
+<!-- JavaScript -->
+<script defer="" src="js/main.js"></script>

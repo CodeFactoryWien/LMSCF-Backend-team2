@@ -1,7 +1,12 @@
+/*window.onscroll = function() {addSticky()};
 
-$(window).on('scroll', function () {
-    if ($(window).scrollTop() >= $(window).height())
-        $('.nav').addClass('sticky');
-    else
-        $('.nav').removeClass('sticky');
-});
+var header = document.getElementById("myHeader");
+var sticky = header.offsetTop;
+
+function addSticky() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
+}*/

@@ -3,8 +3,10 @@
     session_start();
     require_once 'actions/db_connect.php';
 
-    if( isset($_SESSION['admin']) && isset($_SESSION['user']) ) {
-        // select logged-in users details
+    if( isset($_SESSION['admin'])) {
+        $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['admin']);
+        $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+    } else if(isset($_SESSION['user'])) {
         $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
         $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
     }
@@ -13,10 +15,6 @@
 <!DOCTYPE html>
 <html>
 <?php include 'head.php'; ?>
-    <!-- JavaScript -->
-    <script defer="" src="js/main.js"></script>
-    <script defer="" src="js/recipes.js"></script>
-
 <body>
     <!-- Header -->
     <?php include 'header.php'; ?>
@@ -31,157 +29,94 @@
     ?>
 
     <!-- Main Content -->
-
+    <div class="container main mx-auto my-5 p-4">
+        <h1 class="text-center font-weight-bold mb-4">
+            There´re so many Recipes
+        </h1>
+        <p class="p-3">
+            Mushrooms are full of protein, fiber and many vitamins that makes
+            them a perfect meat replacement and also can taste and feel like
+            meat but has the benefits of a very low carbon footprint. Apart
+            from this there are 6 surprising health benefit points from the
+            Treehugger website:
+        </p>
+    </div>          
     <div class="container mx-auto my-5">
-        <div class="mx-auto">
-            <h1 class="text-center font-weight-bold">There´re so many Recipes</h1>
-            <p class="p-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-            </p>
-        </div>
         <div  class="container-fluid row row-cols-1 row-cols-md-1 row-cols-lg-1 mx-auto my-4">
             <?php
             $sql = "SELECT * FROM recipes";
             $result = mysqli_query($conn, $sql);
-            // fetch the next row (as long as there are any) into $row
+
+            //if (count(mysqli_fetch_assoc($result))===0)  {
+            //    echo '<h1 class="text-center font-weight-bold">There are no Recipes</h1>';
+            //}
             while($row = mysqli_fetch_assoc($result)) {
-                echo "
-                <button class="accordion mx-auto">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <img class="card-img h-75" src="img/coverCaulifilower.png" alt="">
-                        </div>
-                        <div class="col-sm-8">
-                            <h1 class="mb-4">Cauliflower &amp; Mushroom</h1>
-                            <p class="p-3">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit, sed do eiusmod tempor incididunt ut labore et
-                                dolore magna aliqua. Lorem ipsum dolor sit amet,
-                                consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Lorem
-                                ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.
-                            </p>
-                            
-                            <div class="accordion-preview-text-stats">
-                                <span>⏱️ 1 hour 40 mins</span>
-                                <span>📜 Hard</span>
+
+                $sqlstep = "SELECT * FROM recipe_steps where recipe_id=".$row['recipe_id'];
+                $resultstep = mysqli_query($conn, $sqlstep);
+                $sqlingr = "SELECT * FROM recipe_ingredients where recipe_id=".$row['recipe_id'];
+                $resultingr = mysqli_query($conn, $sqlingr);
+                echo '<div class="accordion mx-auto">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img class="card-img h-75" src="'
+                                    .$row['image'].
+                                '" alt="">
+                            </div>
+                            <div class="col-sm-8">
+                                <h1 class="mb-4">'
+                                    .$row['name'].
+                                '</h1>
+                                <p class="p-3">'
+                                    .$row['description'].
+                                '</p>
+                                
+                                <div class="">
+                                    <span>⏱️ '.$row['time'].'</span>
+                                    <span>📜 '.$row['difficulty'].'</span>';
+                                    if(isset($_SESSION['admin'])) {
+                                        echo '<span class="ml-auto">
+                                        <a href="update_recipe.php?id='.$row['recipe_id'].'" class="font-weight-bold text-warning mr-3">Update</a>
+                                        <a href="delete_recipe.php?id='.$row['recipe_id'].'" class="font-weight-bold text-danger">Delete</a></span>';
+                                    } 
+                                   echo '
+                                </div>
                             </div>
                         </div>
                     </div>
-                </button>
-                <div class="row">
-                    <div class="col-sm-8">
-                        <?php 
-                            for($i = 1 ; $i<count(result_steps); $i++)
-                            echo '<h2>Step. </h2>'.$i;
-                            echo '<hr>';
-                            echo rowsepts['<p>description</p>'];
-                        ?>
-                    </div>
-                </div>
+                    <div class="row" style="display:none">
+                        <div class="col-sm-8">';
+                        $i=1;
+                        while($rowsteps = mysqli_fetch_assoc($resultstep)) {
+                            echo '<h1>Step '.$i.'</h1>
+                                <p>'.$rowsteps['description'] .'</p>
+                                <br>';
+                            $i++;
+                        }
+                        echo '</div>
+                            <div class="col-sm-4">
+                                <span>-</span><h3 class="">A DISH FOR '.$row['dish'].'</h3><span>+</span>';
 
-                <div class='col mb-4'>
-                    <div class='card h-100'>
-                        <img src=img/".$row['image']." class='card-img-top' alt='...'>
-                        <div class='card-body'>
-                            <h4 class='card-title text-danger name'>". $row['name']."</h4>
-                            <p class='card-text desc'>". $row['description']."</p>
-                            <h5 class='card-text'>Available from: <i class='fa fa-calendar-o text-danger' aria-hidden='true'></i>". $row['date_from']."</h5>
-                        </div>  
-                        <div class='card-footer text-center p-1'>
-                            <a class='text-info font-weight-bold mr-4' href='update.php?id=".$row['product_id']."'>
-                                <i class='fa fa-info-circle' aria-hidden='true'></i> Product details</a>
-                        </div>
+                            while($rowingr = mysqli_fetch_assoc($resultingr)) {
+                            echo '<div class="row">
+                                    <div class="col">'.$rowingr['amount'].'</div>
+                                    <div class="col">'.$rowingr['unit'].'</div>
+                                    <div class="col">'.$rowingr['description'].'</div>
+                                  </div>';
+                            }
+                            echo 
+                        '</div>
                     </div>
-                </div>
-                ";
+                ';
             }
-
 
             // Free result set
             mysqli_free_result($result);
             // Close connection
             mysqli_close($conn);
         ?>
-           <!-- <button class="accordion mx-auto">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <img class="card-img h-75" src="img/coverCaulifilower.png" alt="">
-                    </div>
-                    <div class="col-sm-8">
-                        <h1 class="mb-4">Cauliflower &amp; Mushroom</h1>
-                        <p class="p-3">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Lorem
-                            ipsum dolor sit amet, consectetur adipisicing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.
-                        </p>
-                        
-                        <div class="accordion-preview-text-stats">
-                            <span>⏱️ 1 hour 40 mins</span>
-                            <span>📜 Hard</span>
-                        </div>
-                    </div>
-                </div>
-            </button>
-            <div class="row">
-                <div class="col-sm-8">
-                    <?php 
-                        /*for($i = 1 ; $i<count(result_steps); $i++)
-                        echo '<h2>Step. </h2>'.$i;
-                        echo '<hr>';
-                        echo rowsepts['<p>description</p>'];*/
-                    ?>
-                </div>  
-                <div class="col-sm-4">
-                    <div class="panel-ingredients-title-dish">
-                        <h2 class="border border-bottom-warning">- a dish for 3 +</h2>
-                    </div>
-                    <hr>
-                    <div class="panel-ingredients-list">
-                       
-                        <ul class="panel-ingredients-left">
-                            <li>0.2</li>
-                            <li>50</li>
-                            <li>20</li>
-                            <li>120</li>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>2</li>
-                        </ul>
-                        <ul class="panel-ingredients-mid">
-                            <li>kg</li>
-                            <li>g</li>
-                            <li>g</li>
-                            <li>ml</li>
-                            <li>TL</li>
-                            <li>TL</li>
-                            <li>TL</li>
-                        </ul>
-                        <ul class="panel-ingredients-right">
-                            <li>Cauliflower</li>
-                            <li>Minced Mushroom</li>
-                            <li>Oyster Mushroom</li>
-                            <li>Onion</li>
-                            <li>Paprika</li>
-                            <li>Sour Cream</li>
-                            <li>Cheese</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>        
         </div>
-    </div>-->
-
+    </div>
     <!-- Main Content -->
 
     <!-- Modal Contact -->
@@ -196,3 +131,7 @@
 </body></html>
 
 <?php ob_end_flush(); ?>
+
+<!-- JavaScript -->
+<script src="js/recipes.js"></script>
+<script src="js/main.js"></script>

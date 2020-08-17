@@ -8,7 +8,7 @@
         header("Location: index.php");
         exit;
     }else if(isset($_SESSION['admin'])!=""){
-        header("Location: admin.php");
+        header("Location: products.php");
         exit;
     }
 
@@ -49,9 +49,10 @@
             if( $count == 1 && $row['userPass' ]==$password ) {
                 if ($row["status"] == 'admin'){
                     $_SESSION["admin"] = $row['user_id'];
-                    header( "Location: admin.php");  
+                    header( "Location: products.php");  
                 }else {
                     $_SESSION['user'] = $row['user_id'];
+                    $_SESSION['products']=array();
                     header( "Location: index.php");    
                 }
                 
@@ -65,7 +66,8 @@
 <html>
 <?php include 'head.php'; ?>
 <body>
-    <div class="container mx-auto bg-dark py-3">
+    <div class="container mx-auto my-auto w-75 bg-dark py-3">
+        <div class="container mx-auto my-auto w-75 bg-dark py-3">
         <h3 class="text-center text-danger my-3"><?php if ( isset($errMSG) ) {echo  $errMSG; }?></h3>
         <form method="post"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete= "off">
             <h3 class="text-center text-white mb-3">Login</h3>
@@ -88,7 +90,8 @@
                 Sign up here 
                 </a>
             </div>
-        </form>  
+        </form>
+        </div>   
     </div> 
 </body>
 </html>
