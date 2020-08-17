@@ -95,7 +95,7 @@
                         }
                         echo '</div>
                             <div class="col-sm-4">
-                                <span>-</span><h3 class="">A DISH FOR '.$row['dish'].'</h3><span>+</span>';
+                                <span>-</span><span class="">A DISH FOR '.$row['dish'].'</span><span>+</span>';
 
                             while($rowingr = mysqli_fetch_assoc($resultingr)) {
                             echo '<div class="row">

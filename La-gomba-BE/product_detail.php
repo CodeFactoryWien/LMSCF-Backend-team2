@@ -3,9 +3,11 @@
     session_start();
     require_once 'actions/db_connect.php';
 
-    if (isset($_SESSION['admin']) && isset($_SESSION['user'])) {
-        // select logged-in users details
-        $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
+    if(isset($_SESSION['admin'])) {
+        $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['admin']);
+        $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+    } else if(isset($_SESSION['user'])) {
+		$res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
         $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
     }
 
@@ -16,8 +18,6 @@
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         
-        
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,7 +43,7 @@
     <section>
         <div class="row my-5">
             
-            <img src="img/<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5" >
+            <img src="<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5" >
            
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 py-3 pl-3 pr-5">
@@ -59,11 +59,14 @@
                     <p><b>Get ".$row['amount']." for €".$row['price'].".-</b></p>
                     
                 ";?>
-
-                <form action="index.php?page=cart" method="post">
-                    <input type="number" name="quantity" value="1" min="1" max="<?=$row['quantityAvailable']?>" placeholder="Quantity" required>
-                    <input type="hidden" name="product_id" value="<?=$row['id']?>">
-                    <input type="submit" value="Add To Cart" class="btn btn-warning">
+  <!-- list.php?action=addcart -->
+                <form action="" method="post">
+                    <input type="number" name="quantity" id="quantity" value="1" min="1" max="<?=$row['amount']?>" placeholder="Quantity" required>
+                    <select class="custom-select w-25" id="inputGroupSelect01" name="unit">
+                        <option value="kg">Kg</option>
+                    </select>
+                    <input type="hidden" id="product_id" name="product_id" value="<?=$row['product_id']?>">
+                    <input id="addcart" type="submit" value="Add To Cart" class="btn btn-warning">
                 </form>
             </div>
         </div>
@@ -90,3 +93,24 @@
 </body></html>
     
 <?php ob_end_flush(); ?>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+      $("#addcart").click(function(e){
+          e.preventDefault();
+        	$.ajax({type: "POST",
+                url: "cart.php?action=addcart",
+                data: { product_id: $("#product_id").val(), quantity: $("#quantity").val() },
+                success:function(result){
+                	if(result) {
+                		Swal.fire(
+						  'Thank you!',
+						  'The product was added to the shopping card!',
+						  'success'
+						)
+                	}
+        		}
+        	});
+      });
+    });
+</script>

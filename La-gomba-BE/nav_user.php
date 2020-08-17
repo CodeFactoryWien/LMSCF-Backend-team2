@@ -32,12 +32,20 @@
     </span>
     <?php
         if(!isset($_SESSION['user'])) {
-            echo '<a href="login.php" class="nav-link font-weight-bold btn btn-outline-warning">Login</a>
-                <a class="nav-link font-weight-bold btn btn-outline-warning" href="list.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            echo '
+            <a class="nav-link font-weight-bold btn btn-outline-success mr-1" href="cart.php">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </a>
+            <a href="login.php" class="nav-link font-weight-bold btn btn-outline-warning">Login</a>
+                
             ';
         } else {
-            echo '<a href="logout.php?logout" class="nav-link font-weight-bold btn btn-outline-warning ">Log out</a>
-            <a class="nav-link font-weight-bold btn btn-outline-warning ml-1" href="list.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>';  
+            echo '
+            <a class="nav-link font-weight-bold btn btn-outline-success mr-1" href="cart.php">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </a>
+            <a href="logout.php?logout" class="nav-link font-weight-bold btn btn-outline-warning ">Log out</a>
+            ';  
         }
     ?>
 </nav>

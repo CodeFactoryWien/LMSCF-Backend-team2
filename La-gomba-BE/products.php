@@ -46,7 +46,7 @@
                             <h5 class='card-text'>Available from: <i class='fa fa-calendar-o text-danger' aria-hidden='true'></i>". $row['date_from']."</h5>
                         </div>  
                         <div class='card-footer link text-center p-1'>
-                        <a class='text-info font-weight-bold mr-4' href='details.php?id=".$row['product_id']."'>
+                        <a class='text-info font-weight-bold mr-4' href='product_detail.php?id=".$row['product_id']."'>
                         <i class='fa fa-info-circle' aria-hidden='true'></i> View Product</a>";
                             if(isset($_SESSION['admin'])) {
                                 echo '
@@ -54,13 +54,7 @@
                                 <a href="delete_product.php?id='.$row['product_id'].'" class="font-weight-bold text-danger">Delete</a>
                                 ';
                             } 
-                             echo '
-                             <form method="post" action="list.php?action=addcart">
-                              <p style="text-align:center;color:#04B745;">
-                                <button type="submit" class="btn btn-success">Add To Cart</button>
-                                <input type="hidden" name="product_id" value="'.$row['product_id'].'">
-                              </p>
-                            </form>          
+                             echo '          
                         </div>
                     </div>
                 </div>

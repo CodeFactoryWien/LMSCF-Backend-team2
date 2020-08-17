@@ -7,7 +7,6 @@ if (isset($_SESSION['admin'])) {
     $db = new DB; 
      
     // Get payment details 
-    $conditions = ''; 
     $paymentDatas = $db->getRows('payments'); 
      
     
@@ -21,12 +20,11 @@ if (isset($_SESSION['admin'])) {
 <link rel="stylesheet" href="../css/styles.css">
 
 <body class="main">
-
-<div class="status">
+<a class="btn btn-dark" href="../">HOME</a>
+<div class="status container m-4 p-4">
     <?php if(!empty($paymentDatas)){ 
 		  foreach ($paymentDatas as $paymentData) {
 	?>
-        <h1 class="success">Your Payment has been Successful!</h1>
         <h4>Payment Information</h4>
         <p><b>TXN ID:</b> <?php echo $paymentData['txn_id']; ?></p>
         <p><b>Paid Amount:</b> <?php echo $paymentData['payment_gross'].' '.$paymentData['currency_code']; ?></p>
