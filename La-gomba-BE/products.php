@@ -40,7 +40,7 @@
                     echo "
                     <div class='col mb-4'>
                         <div class='card h-100'>
-                            <img src=".$row['image']." class='card-img-top' alt='...'>
+                            <img src=".$row['image']." class='card-img-top prodimg' alt='...'>
                             <div class='card-body'>
                                 <h3 class='card-title text-warning'>". $row['name']."</h3>
                                 <h5 class='card-text'>Quality " . $row['quality']."</h5>
