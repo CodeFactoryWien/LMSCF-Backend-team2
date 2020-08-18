@@ -1,19 +1,20 @@
 <?php
 ob_start();
 session_start();
+// Include and initialize database class 
+include_once 'DB.php'; 
+$db = new DB; 
 $redirectStr = ''; 
 if(!empty($_GET['paymentID']) && !empty($_GET['token']) && !empty($_GET['payerID']) && !empty($_GET['pid']) ){ 
-    // Include and initialize database class 
-    include_once 'DB.php'; 
- 	$db = new DB; 
+    
     // Include and initialize paypal class 
     include_once 'Paypal.php'; 
     $paypal = new PaypalExpress; 
-     
     // Get payment info from URL 
     $paymentID = $_GET['paymentID']; 
     $token = $_GET['token']; 
-    $payerID = $_GET['payerID']; 
+    $payerID = $_GET['payerID'];
+    $user_id = $_GET['uid']; 
     $productIDs = explode(",",$_GET['pid']);
     $productAmounts = explode(",",$_GET['pamounts']); 
     // Validate transaction via PayPal API 
@@ -50,6 +51,7 @@ if(!empty($_GET['paymentID']) && !empty($_GET['token']) && !empty($_GET['payerID
 	            // Insert transaction data in the database 
 	            $data = array( 
 	                'product_id' => $productID,
+                    'user_id' => $user_id,
                     'amount' => $productAmount, 
 	                'txn_id' => $id, 
 	                'payment_gross' => $paidAmount, 
@@ -71,8 +73,40 @@ if(!empty($_GET['paymentID']) && !empty($_GET['token']) && !empty($_GET['payerID
      
     // Redirect to payment status page 
     //header("Location:payment_status.php".$redirectStr); 
-}else{ 
-    // Redirect to the home page 
-    //header("Location:../products.php"); 
-} 
+} else if($_GET['method']==='cash') {
+    $user_id = $_GET['uid']; 
+    $productIDs = explode(",",$_GET['pid']);
+    $productAmounts = explode(",",$_GET['pamounts']); 
+
+    for($i = 0; $i< count($productIDs); $i++)  {
+        // Get product details
+        $productID = $productIDs[$i];
+        $productAmount = $productAmounts[$i];
+        $conditions = array( 
+            'where' => array('product_id ' => $productID), 
+            'return_type' => 'single' 
+        ); 
+        $productData = $db->getRows('products', $conditions); 
+         
+        // If payment price is valid 
+        //if($productData['price'] >= $paidAmount){ 
+             
+            // Insert transaction data in the database 
+            $data = array( 
+                'product_id' => $productID,
+                'user_id' => $user_id,
+                'amount' => $productAmount
+            ); 
+            $insert = $db->insert('payments', $data); 
+            // Add insert id to the URL 
+            //$redirectStr = '?id='.$insert; 
+        //}
+    }
+    unset($_SESSION['products']); 
+    echo 'Success';
+    header("Location:../products.php"); 
+}
+else {
+     echo 'Error';
+}
 ?>

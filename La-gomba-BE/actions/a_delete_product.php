@@ -25,7 +25,7 @@
     <!-- Main Navbar -->
     <?php include '../nav_admin.php';?>
 
-    <div class="container mt-4 mx-auto text-center">
+    <div class="container mt-4 mx-auto text-center my-4">
         <?php 
             if ($_POST) {
                 $id = $_POST['id'];
@@ -33,7 +33,7 @@
                 $sql = "DELETE FROM products WHERE product_id = {$id}";
 
                 if($conn->multi_query($sql) === TRUE) {
-                    echo "<h1 class='text-white'>Successfully deleted!!</h1>" ;
+                    echo "<h1 class='text-dark'>Successfully deleted!</h1>" ;
                     header("Refresh: 2; url= ../products.php");
                 } else {
                 echo "Error updating record : " . $conn->error;

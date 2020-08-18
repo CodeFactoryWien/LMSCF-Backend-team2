@@ -49,6 +49,3 @@
         }
     ?>
 </nav>
-<script>
-
-</script>

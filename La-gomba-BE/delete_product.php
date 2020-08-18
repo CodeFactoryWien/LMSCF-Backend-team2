@@ -24,7 +24,7 @@
 <?php include 'head.php'; ?>
 <body>
 	<?php include 'nav_admin.php'; ?>
-	<div class="container mt-4 mx-auto text-center">
+	<div class="container mx-auto text-center my-4">
 		<h3 class="text-dark">Do you really want to delete this product?</h3>
 		<form action ="actions/a_delete_product.php" method="post">
 			<input type="hidden" name="id" value="<?php echo $id ?>" />

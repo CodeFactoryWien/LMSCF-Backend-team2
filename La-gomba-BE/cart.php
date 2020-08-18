@@ -66,11 +66,6 @@
             include 'nav_admin.php';
         }
     ?>
-    <div class="paypal">
-        
-            
-         
-    </div>
 
     <!-- Main Content -->
     <div class="container mx-auto font-weight-bold mt-2 py-3">
@@ -99,17 +94,39 @@
     		    <tr>
     		      <td><img src="<?php print $product['image']?>" width="50"></td>
     		      <td><?php print $product['name']?></td>
-    		      <td>$<?php print $product['price']?></td>
+    		      <td>€<?php print $product['price']?>‎</td>
     		      <td><?php print $product['qty']?></td>
                   <td><a href="cart.php?action=empty&product_id=<?php print $key?>" class="btn btn-danger">Delete</a></td>
     		    </tr>
     		    <?php $total = $total+($product['price']*$product['qty']);?>
     		    <?php endforeach;?>
 
-    		    <tr><td colspan="5" align="right"><h4>Total:$<?php print $total?></h4></td></tr>
+    		    <tr><td colspan="5" align="right"><h4>Total:€<?php print $total?>‎</h4></td></tr>
         </table>
-		  
-        <div id="paypal-button"></div>
+        <div class="row">
+            <div class="col-sm-12 mx-auto">
+                <div class="card ">
+                    <div class="card-header">
+                        <div id="paypal" class="tab-pane pt-3">
+                            <h5 class="pb-2">Select your payment method</h5>
+                            
+                            <div class="form-group"> 
+                                <label class="radio-inline"> <input type="radio" name="payment" checked
+                                value="paypal-button"> Paypal 
+                                </label>
+                                <label class="radio-inline"> <input type="radio" name="payment" class="ml-5"
+                                value="on-delivery" > On Delivery 
+                                </label>
+                            </div>
+                            <div id="paypal-button" class="show-hide-element"></div>
+                            <input type="button" name="cash" id="on-delivery" class="btn btn-warning text-primary font-weight-bold rounded-pill show-hide-element" value="Buy products" style="display: none;">
+                            <p class="text-muted"> Note: After clicking the payment option, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     <?php } else { echo '<h1 class="text-center"><b>The card is empty!<b></h1>'; } ?>
     </div>
@@ -123,6 +140,7 @@
 <?php ob_end_flush(); ?>
 
 <script>
+$(document).ready(function(){
 const elementExists = !!document.getElementById('paypal-button');
 if (elementExists) {
     paypal.Button.render({
@@ -145,7 +163,7 @@ if (elementExists) {
                 transactions: [{
                     amount: {
                         total: '<?php echo $total; ?>',
-                        currency: '<?php echo 'USD'; ?>'
+                        currency: '<?php echo 'EUR'; ?>'
                     }
                 }]
           });
@@ -156,23 +174,52 @@ if (elementExists) {
             .then(function () {
                 let products = $("input[name='ids[]']").map(function(){return $(this).val();}).get();
                 let pid = products.join(',')
-                console.log(pid +'ok')
                 let amounts = $("input[name='amounts[]']").map(function(){return $(this).val();}).get();
-                let pamounts = amounts.join(',')
-                console.log(pamounts +'ok')
-                $.get('actions/process.php', { paymentID: data.paymentID,token: data.paymentToken, payerID: data.payerID, pid: pid, pamounts: pamounts}, function(response) {
+                let pamounts = amounts.join(',');
+                let uid =  '<?php echo $userRow['user_id']; ?>';
+                $.get('actions/process.php', { paymentID: data.paymentID,token: data.paymentToken, payerID: data.payerID, pid: pid, pamounts: pamounts, uid: uid}, function(response) {
                     if (response) {
-                        console.log('res', response)
                         Swal.fire(
                           'Thank you!',
                           'Thank you for your purchase!',
                           'success'
                         )
-                        setTimeout("window.location='cart.php'", 3000);
+                        setTimeout("window.location='products.php'", 2000);
                     }
                 });
             });
         }
     }, '#paypal-button');
 }
+
+// Payment options
+$("input[name$='payment']").click(function() {
+    $(".show-hide-element").hide();
+    var val = $(this).val();
+    $("#" + val).show();
+});
+
+
+$("#on-delivery").click(function() {
+    let products = $("input[name='ids[]']").map(function(){return $(this).val();}).get();
+    let pid = products.join(',')
+    let amounts = $("input[name='amounts[]']").map(function(){return $(this).val();}).get();
+    let pamounts = amounts.join(',');
+    let uid =  '<?php echo $userRow['user_id']; ?>';
+    let method = 'cash';
+    $.get('actions/process.php', { pid: pid, pamounts: pamounts, uid: uid, method: method}, function(response) {
+        if (response) {
+            Swal.fire(
+              'Thank you!',
+              'Thank you for your purchase!',
+              'success'
+            )
+            setTimeout("window.location='products.php'", 2000);
+        }
+    });
+});
+
+
+
+});
 </script>

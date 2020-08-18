@@ -42,5 +42,4 @@
         </a>
     </p>  
 </div>
-<script defer="" src="js/stickyNav.js"></script>
 

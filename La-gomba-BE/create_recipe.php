@@ -29,67 +29,80 @@
     ?>
 
     <!-- Main Content -->
-    <div class="container mx-auto font-weight-bold mt-2 bg-dark text-white py-3 my-4">
-        <form action="actions/a_create_recipe.php" method ="post" >
-        <hr>
-            <label class="text-warning">Recipe Details: </label>
-        <hr> 
-        <div class="form-row justify-content-center"> 
-            <div class="form-group col-md-4 mb-2">
-                <label for="name">Name: </label>
-                <input type="text" class="form-control" name="name" placeholder="Mushroom Name">
+    <div class="container rounded mx-auto font-weight-bold mt-2 bg-dark text-white py-3 my-4">
+        <form action="actions/a_create_recipe.php" method ="post" id="recipeData">
+            <hr class="border border-warning">
+                <label class="text-warning">Recipe Details: </label>
+            <hr class="border border-warning "> 
+            <div class="form-row justify-content-center"> 
+                <div class="form-group col-md-4 mb-2">
+                    <label for="name">Name: </label>
+                    <input type="text" class="form-control" name="name" placeholder="Mushroom Name">
+                </div>
+                <div class="form-group col-md-4 mb-2">
+                    <label for="time">Time: </label>
+                    <input type="text" class="form-control" name="time" placeholder="Time of cooking">
+                </div>  
             </div>
-            <div class="form-group col-md-4 mb-2">
-                <label for="time">Time: </label>
-                <input type="text" class="form-control" name="time" placeholder="Time of cooking">
-            </div>  
-        </div>
-        <div class="form-row justify-content-center"> 
-            <div class="form-group col-md-4 mb-2">
-                <label for="difficulty">Difficulty: </label>
-                <input type="text" class="form-control" name="difficulty" 
-            placeholder="Recipe difficulty: hard, medium, easy">
-             </div>
-             <div class="form-group col-md-4 mb-2">
-                <label for="dish">Portion: </label>
-                <input type="number" class="form-control" name="dish" placeholder="Recipe portion, for 1 or 2, ... persons">
-             </div> 
-        </div>
-            <div class="form-group col-sm-8 mb-2 mx-auto px-0">
-                <label for="image">Image: </label>
-                <input type="url" class="form-control" name="image" placeholder="product image path">
+            <div class="form-row justify-content-center"> 
+                <div class="form-group col-md-4 mb-2">
+                    <label for="difficulty">Difficulty: </label>
+                    <input type="text" class="form-control" name="difficulty" 
+                placeholder="Recipe difficulty: hard, medium, easy">
+                 </div>
+                 <div class="form-group col-md-4 mb-2">
+                    <label for="dish">Portion: </label>
+                    <input type="number" class="form-control" name="dish" placeholder="Recipe portion, for 1 or 2, ... persons">
+                 </div> 
             </div>
-            <div class="form-group col-sm-8 mb-2 mx-auto px-0">
+            <div class="form-group col-sm-8 mb-4 mx-auto px-0">
                 <label for="description">Description: </label>
                 <textarea type="text" class="form-control" name="description" placeholder="Recipe short description"></textarea> 
             </div>
-            <hr>
+            
+            <hr class="border border-warning mt-4">
                 <label class="text-warning">Recipe Steps: </label>
-            <hr>
+            <hr class="border border-warning mb-4">
             <div class="form-group col-md-8 mb-2 mx-auto">
                 <div id="recipes_steps" name="recipes_steps">
                     <label>Step1: </label>
-                    <input type="text" class="form-control" id="recipes_description" name="recipes_description[]">
+                    <input type="text" class="form-control mb-2" id="recipes_description" name="recipes_description[]">
                 </div>
-                <button id="add_steps" class="btn btn-success mt-1">Add New Step</button>
+                <button id="add_steps" class="btn btn-warning mt-1">Add New Step</button>
             </div>
-            <hr>
+            <hr class="border border-warning mt-4">
                 <label class="text-warning">Recipe Ingredients: </label>
-            <hr>
-            <div class="form-group col-md-8 mb-2 mx-auto">
+            <hr class="border border-warning mb-4">
+            <div class="form-group col-md-8 mb-4 mx-auto">
                 <div id="recipes_ingredients" name="recipes_ingredients">
-                    <label>Ingredient 1:</label><br>
+                    <label class="border border-warning p-2">Ingredient 1:</label><br>
                     <label>Amount 1:</label>
-                    <input type="text" class="form-control" id="ingredients" name="ing_amount[]">
+                    <input type="text" class="form-control mb-2" id="ingredients" name="ing_amount[]">
                     <label>Unit 1:</label>
-                    <input type="text" class="form-control" name="ing_unit[]">
+                    <input type="text" class="form-control mb-2" name="ing_unit[]">
                     <label>Name 1:</label>
-                    <input type="text" class="form-control" name="ing_description[]">
+                    <input type="text" class="form-control mb-2" name="ing_description[]">
                 </div>
-                <button id="add_ingredients" class="btn btn-success mt-1">Add New Ingredient</button>
+                <button id="add_ingredients" class="btn btn-warning mt-1">Add New Ingredient</button>
             </div>
-            <div class="form-group col-md-5 mx-auto px-0">
-                <input type="submit" class="btn btn-success form-control" value="Submit">
+            <hr class="border border-warning mt-4">
+                <label class="text-warning">Recipe image: </label>
+            <hr class="border border-warning mb-4">
+            <div class="form-row justify-content-center mb-2">
+                <form method="post" action="" enctype="multipart/form-data" id="myform">
+                    <div class='preview col-sm-4 mb-2 w-50'>
+                        <img src="" id="img" class="w-100 h-100" >
+                    </div>
+                    <div class="col-sm-4 mb-2 w-50">
+                        <input type="file" id="file" name="file"/>
+                        <input type="button" class="btn btn-warning btn-sm mt-2" value="Upload Image" id="but_upload">
+                    </div>     
+                </form>
+                <input type="hidden" id="image" name="image" value="">
+            </div>
+            
+            <div class="form-group col-md-5 mx-auto px-0 mt-4">
+                <input type="submit" class="btn btn-success form-control" value="Submit" id="recipeDataButton">
             </div>
         </form>
     </div>

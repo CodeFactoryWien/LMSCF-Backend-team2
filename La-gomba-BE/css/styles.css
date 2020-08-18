@@ -9,38 +9,12 @@ body {
     padding:0;
 }
 
-.paypal {
-    text-align: right;
-    padding-bottom: 40px;
-}
-.paypal button {
-    display: inline-block;
-    padding: 10px 20px 7px 20px;
-    background-color: #FFC439;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    width: 215px;
-}
-.paypal button:hover {
-    background-color: #f3bb37;
-}
-
 .jumbotron {
     background-image: url('../img/IMG_9121.JPG');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     height: 70vh;
-}
-
-.jumbotron h1 {
-    font-size: 8rem!important;
-    margin-left: 10%
-}
-.jumbotron p {
-    font-size: 3rem!important;
-    margin-left: 10%
 }
 
 .bgg1 {
@@ -85,20 +59,13 @@ a {
     color: currentColor;
 }
 
-.sticky {
-    position: fixed;
-    top: 0%;
-    width: 100%;
-    z-index: 1;
-}
-
-.active {
-    background-color: black;
-    color: white;
-}
 
 .active img {
     width: 100%;
+}
+
+.prodimg {
+    height: 40vh;
 }
 
 .end {
@@ -121,9 +88,25 @@ a {
     font-size: 1.6rem;
 }
 
+/* Preview */
+.preview{
+   width: 100px;
+   height: 100px;
+   border: 1px solid black;
+   background: white;
+}
+
+.preview img{
+   display: none;
+}
+
 .reciCard:hover {
     box-shadow: 10px 10px 5px grey;
-  }
+}
+
+.accordion img {
+    height: 60vh;
+}
 
 @media(max-width: 660px) {
     .jumbotron h1 {
@@ -143,13 +126,6 @@ a {
         width: 24vw;
     }
 
-    .sticky {
-        position: fixed;
-        top: 0%;
-        width: 100%;
-        z-index: 1;
-    }
-
     .title h5 {
         font-size: 0.8rem!important;
     }
@@ -162,26 +138,11 @@ a {
 }
 
 @media(min-width: 661px) and (max-width: 1000px) {
-    .jumbotron h1 {
-        font-size: 4.4rem!important;  
-    }
-
-    .jumbotron p {
-        font-size: 1.8rem!important;
-    }
-
     .navbar-nav a {
-        font-size: 0.9rem;
+        font-size: 0.6rem;
     }
 
     .logo {
-        width: 18vw;
-    }
-
-    .sticky {
-        position: fixed;
-        top: 0%;
-        width: 100%;
-        z-index: 1;
+        width: 15vw;
     }
 }

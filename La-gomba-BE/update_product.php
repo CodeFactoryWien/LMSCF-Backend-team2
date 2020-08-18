@@ -37,8 +37,9 @@
     <?php
         include 'nav_admin.php';
     ?>
-    <div class="container mx-auto bg-dark font-weight-bold mt-2 py-3">
-        <form action="actions/a_update_product.php" method ="post" >
+    <div class="container mx-auto bg-dark font-weight-bold mt-2 py-3 text-info">
+        <form action="actions/a_update_product.php" method ="post" id="productDataUpdate">
+            <input type= "hidden" name="product_id" value="<?php echo $data['product_id'] ?>" />
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-4 mb-2">
                     <label for="name">Name: </label>
@@ -60,33 +61,42 @@
                     <input type="date" class="form-control" name="date_from" placeholder="Available from this date" value="<?php echo $data['date_from'] ?>">
                 </div>
             </div>
-            <div class="form-group col-md-8 mb-2 mx-auto px-0">
-                <label for="amount">Amount: </label>
-                <input type="text" class="form-control" name="amount" placeholder="Mushroom amount" value="<?php echo $data['amount'] ?>">
-            </div>
-            <div class="form-group col-md-8 mb-2 mx-auto px-0">
-                <label for="unit">Unit: </label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                    </div>
-                    <select class="custom-select" id="inputGroupSelect01"  name="unit">
-                        <option <?php if($data['unit']==='g') echo 'selected'; ?> value="g">Gram</option>
-                        <option <?php if($data['unit']==='kg') echo 'selected'; ?> value="kg">Kg</option>
-                    </select>
+            <div class="form-row justify-content-center">
+                <div class="form-group col-md-4 mb-2 mx-auto px-0">
+                    <label for="amount">Amount: </label>
+                    <input type="text" class="form-control" name="amount" placeholder="Mushroom amount" value="<?php echo $data['amount'] ?>">
                 </div>
-            </div> 
-            <div class="form-group col-md-8 mb-2 mx-auto px-0">
-                <label for="image">Image: </label>
-                <input type="text" class="form-control" name="image" placeholder="Product image path" value="<?php echo $data['image'] ?>">
+                <div class="form-group col-md-4 mb-2 mx-auto px-0">
+                    <label for="unit">Unit: </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01"  name="unit">
+                            <option <?php if($data['unit']==='g') echo 'selected'; ?> value="g">Gram</option>
+                            <option <?php if($data['unit']==='kg') echo 'selected'; ?> value="kg">Kg</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="form-group col-md-8 mb-2 mx-auto px-0">
                 <label for="description">Description: </label>
                 <textarea type="text" class="form-control" name="description" placeholder="Mushroom short description"><?php echo $data['description'] ?></textarea> 
             </div>
+            <div class="form-row justify-content-center mb-2">
+                <input type="hidden" id="image" name="image" value="<?php echo $data['image'] ?>">
+                <form method="post" action="" enctype="multipart/form-data" id="myform">
+                    <div class='preview-update col-sm-4 mb-2 w-50'>
+                        <img src="<?php echo $data['image'] ?>" id="img" class="w-100 h-100" >
+                    </div>
+                    <div class="col-sm-4 mb-2 w-50">
+                        <input type="file" id="file" name="file"/>
+                        <input type="button" class="btn btn-warning mt-2" value="Upload Image" id="but_upload">
+                    </div>     
+                </form>
+            </div>
             <div class="form-group col-md-4 mx-auto">
-                <input type= "hidden" name="product_id" value="<?php echo $data['product_id'] ?>" />
-                <input type="submit" class="btn btn-dark form-control" value="Update Product">
+                <input type="submit" class="btn btn-warning form-control" id="productDataUpdateButton" value="Update Product">
             </div>
 
         </form>
@@ -95,6 +105,7 @@
     
     <!-- Footer -->
     <?php include 'footer.php'; ?>
+    <script type="text/javascript" src="js/products.js"></script>
 </body>
 </html>
 

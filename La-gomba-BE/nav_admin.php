@@ -19,6 +19,9 @@
             <li class="nav-item">
                 <a class="nav-link text-white" href="create_recipe.php">NEW RECIPE</a>
             </li>
+            <li class="nav-item">    
+                <a class="nav-link text-white" href="payment_status.php">ORDERS</a>
+            </li>
         </ul>
     </div>
     <span class="ml-auto text-white mr-3 ">
@@ -30,7 +33,7 @@
     <?php
         if(!isset($_SESSION['admin'])) {
             echo '
-            <a class="nav-link font-weight-bold btn btn-outline-success mr-1" href="list.php">
+            <a class="nav-link btn btn-outline-success mr-1" href="cart.php">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
             <a href="login.php" class="nav-link font-weight-bold btn btn-outline-warning">Login</a>
@@ -38,7 +41,7 @@
                 ';
         } else {
             echo '
-            <a class="nav-link font-weight-bold btn btn-outline-success mr-1" href="list.php">
+            <a class="nav-link btn btn-outline-success mr-1" href="cart.php">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </a>
             <a href="logout.php?logout" class="nav-link font-weight-bold btn btn-outline-warning ">Log out</a>

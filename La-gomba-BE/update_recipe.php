@@ -43,7 +43,8 @@
     ?>
 
     <div class="container mx-auto font-weight-bold mt-2 bg-secondary py-3 my-4">
-        <form action="actions/a_update_recipe.php" method ="post" >
+        <form action="actions/a_update_recipe.php" method ="post" id="recipeDataUpdate">
+            <input type= "hidden" name="recipe_id" value="<?php echo $data['recipe_id'] ?>" />
         <hr>
             <label class="text-warning">Recipe Details: </label>
         <hr> 
@@ -119,8 +120,7 @@
             </div>
             <button id="add_ingredients" class="btn btn-success mx-auto">Add Ingredients to Recipe</button>
             <div class="form-group col-md-5 mx-auto px-0">
-                <input type= "hidden" name="recipe_id" value="<?php echo $data['recipe_id'] ?>" />
-                <input type="submit" class="btn btn-success form-control" value="Submit">
+                <input type="submit" class="btn btn-success form-control" value="Submit" id="recipeDataUpdateButton">
             </div>
         </form>
     </div>
