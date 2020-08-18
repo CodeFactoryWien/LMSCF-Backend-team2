@@ -30,15 +30,13 @@
 
     <!-- Main Content -->
     <div class="container main mx-auto my-5 p-4">
-        <h1 class="text-center font-weight-bold mb-4">
+        <h1 class="font-weight-bold mb-4">
             There´re so many Recipes
         </h1>
-        <p class="p-3">
+        <p class="py-3">
             Mushrooms are full of protein, fiber and many vitamins that makes
             them a perfect meat replacement and also can taste and feel like
-            meat but has the benefits of a very low carbon footprint. Apart
-            from this there are 6 surprising health benefit points from the
-            Treehugger website:
+            meat but has the benefits of a very low carbon footprint.
         </p>
     </div>          
     <div class="container mx-auto my-5">
@@ -56,52 +54,54 @@
                 $resultstep = mysqli_query($conn, $sqlstep);
                 $sqlingr = "SELECT * FROM recipe_ingredients where recipe_id=".$row['recipe_id'];
                 $resultingr = mysqli_query($conn, $sqlingr);
-                echo '<div class="accordion mx-auto">
+                echo '<div class="accordion reciCard mx-auto my-2">
                         <div class="row">
                             <div class="col-sm-4">
-                                <img class="card-img h-75" src="'
+                                <img class="card-img" src="'
                                     .$row['image'].
-                                '" alt="">
+                                '" alt="'
+                                .$row['name'].
+                            '">
                             </div>
-                            <div class="col-sm-8">
-                                <h1 class="mb-4">'
+                            <div class="col-sm-8 pt-5">
+                                <h1 class="my-3 p-3">'
                                     .$row['name'].
                                 '</h1>
                                 <p class="p-3">'
                                     .$row['description'].
                                 '</p>
                                 
-                                <div class="">
+                                <div class="p-3">
                                     <span>⏱️ '.$row['time'].'</span>
                                     <span>📜 '.$row['difficulty'].'</span>';
                                     if(isset($_SESSION['admin'])) {
-                                        echo '<span class="ml-auto">
-                                        <a href="update_recipe.php?id='.$row['recipe_id'].'" class="font-weight-bold text-warning mr-3">Update</a>
-                                        <a href="delete_recipe.php?id='.$row['recipe_id'].'" class="font-weight-bold text-danger">Delete</a></span>';
+                                        echo '<div class="my-3">
+                                        <a href="update_recipe.php?id='.$row['recipe_id'].'" type="button" class="btn btn-success m-3">Update</a>
+                                        <a href="delete_recipe.php?id='.$row['recipe_id'].'" type="button" class="btn btn-danger m-3">Delete</a>
+                                        </div>';
                                     } 
                                    echo '
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="display:none">
-                        <div class="col-sm-8">';
+                    <div class="row mt-5 pt-4" style="display:none">
+                        <div class="col-sm-8 food">';
                         $i=1;
                         while($rowsteps = mysqli_fetch_assoc($resultstep)) {
-                            echo '<h1>Step '.$i.'</h1>
-                                <p>'.$rowsteps['description'] .'</p>
+                            echo '<h1><span class="border-bottom border-warning pr-5">Step '.$i.'</span></h1>
+                                  <p>'.$rowsteps['description'] .'</p>
                                 <br>';
                             $i++;
                         }
                         echo '</div>
-                            <div class="col-sm-4">
-                                <span>-</span><span class="">A DISH FOR '.$row['dish'].'</span><span>+</span>';
+                            <div class="col-sm-3 m-2">
+                                <span><i class="fa fa-minus-circle"></i></span><span class="mx-2"> A DISH FOR '.$row['dish'].' </span><span><i class="fa fa-plus-circle"></i></span>';
 
                             while($rowingr = mysqli_fetch_assoc($resultingr)) {
-                            echo '<div class="row">
-                                    <div class="col">'.$rowingr['amount'].'</div>
-                                    <div class="col">'.$rowingr['unit'].'</div>
-                                    <div class="col">'.$rowingr['description'].'</div>
+                            echo '<div>
+                                    <span>'.$rowingr['amount'].'  '.$rowingr['unit'].'</span>
+                                    <span>'.$rowingr['description'].'</span>
                                   </div>';
                             }
                             echo 

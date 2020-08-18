@@ -121,6 +121,10 @@ a {
     font-size: 1.6rem;
 }
 
+.reciCard:hover {
+    box-shadow: 10px 10px 5px grey;
+  }
+
 @media(max-width: 660px) {
     .jumbotron h1 {
         font-size: 4.4rem!important;  
