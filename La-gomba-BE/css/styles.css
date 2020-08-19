@@ -60,9 +60,9 @@ a {
 }
 
 
-.active img {
+/* .active img {
     width: 100%;
-}
+} */
 
 .prodimg {
     height: 40vh;
@@ -104,9 +104,54 @@ a {
     box-shadow: 10px 10px 5px grey;
 }
 
+/*new stuff*/
+
+.reciTitle{
+    font-size: 5rem!important;
+    color: #fad40b;
+}
+
+.reciDescription{
+    font-size: 1.5rem!important;
+}
+
+.reciDifficulty{
+    font-size: 1.3rem!important;
+}
+
+.stepsTitel{
+    border-bottom: 3px solid #fad40b;
+    font-size: 1.8rem!important;
+
+}
+
+.stepsText{
+    font-size: 1.3rem!important;
+}
+
+.reciFood{
+    font-size: 1.3rem!important;
+}
+
+.active{
+    border-bottom: 6px solid #fad40b;
+    height: 46vh;
+}
+
+.active img {
+    height: 45.5vh!important;
+    width: 45%;
+}
+
+
+/* new stuff end */
+
+
 .accordion img {
     height: 60vh;
 }
+
+
 
 @media(max-width: 660px) {
     .jumbotron h1 {

@@ -29,21 +29,19 @@
     ?>
 
     <!-- Main Content -->
-    <div class="container main mx-auto my-5 p-4">
-        <h1 class="font-weight-bold mb-4">
+    <div class="container main mt-5 py-4">
+        <h1>
             There´re so many Recipes
         </h1>
-        <p class="p-3">
+        <p class="py-3">
             Mushrooms are full of protein, fiber and many vitamins that makes
             them a perfect meat replacement and also can taste and feel like
-            meat but has the benefits of a very low carbon footprint. Apart
-            from this there are 6 surprising health benefit points from the
-            Treehugger website:
+            meat but has the benefits of a very low carbon footprint.
         </p>
-    </div>          
-    <div class="container mx-auto my-5">
-        <div  class="container-fluid row row-cols-1 row-cols-md-1 row-cols-lg-1 mx-auto my-4">
-            <?php
+    </div>  
+
+    <div class="container mx-auto my-2">
+          <?php
             $sql = "SELECT * FROM recipes";
             $result = mysqli_query($conn, $sql);
 
@@ -56,52 +54,59 @@
                 $resultstep = mysqli_query($conn, $sqlstep);
                 $sqlingr = "SELECT * FROM recipe_ingredients where recipe_id=".$row['recipe_id'];
                 $resultingr = mysqli_query($conn, $sqlingr);
-                echo '<div class="accordion row reciCard bg-white mx-auto mb-4"> 
-                        <img class="img-fluid col-sm-4" src="'.$row['image'].'" alt="">
-                        <div class="col-sm-8 bg-white">
-                            <h1 class="text-warning">'
+                echo '<div class="accordion row reciCard bg-white my-4"> 
+                        <img class="img-fluid col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-0" src="'.$row['image'].'" alt="'.$row['name'].'">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8  py-3 pl-5">
+                            <h1 class="reciTitle">'
                                 .$row['name'].
                             '</h1>
-                            <p class="p-3">'
+                            <p class="reciDescription">'
                                 .$row['description'].
                             '</p>
                             
-                            <div class="mt-auto">
-                                <span>⏱️ '.$row['time'].'</span>
-                                <span>📜 '.$row['difficulty'].'</span>';
+                            <div class="align-self-end">
+                                <span class="reciDifficulty">⏱️ '.$row['time'].'</span>
+                                <span>📜 '.$row['difficulty'].'</span>
+                            </div>';
                                 if(isset($_SESSION['admin'])) {
-                                    echo '<span class="ml-auto">
-                                    <a href="update_recipe.php?id='.$row['recipe_id'].'" class="font-weight-bold text-warning mr-3">Update</a>
-                                    <a href="delete_recipe.php?id='.$row['recipe_id'].'" class="font-weight-bold text-danger">Delete</a></span>';
+                                    echo '
+                                    <div class="my-3">
+                                        <a href="update_recipe.php?id='.$row['recipe_id'].'" type="button" class="btn btn-success py-2 px-3 m-2">Update</a>
+                                        <a href="delete_recipe.php?id='.$row['recipe_id'].'" type="button" class="btn btn-danger py-2 px-3 m-2">Delete</a>
+                                    </div>';
                                 } 
                                echo '
-                            </div>
                         </div>
                     </div>
-                    <div class="row" style="display:none">
-                        <div class="col-sm-8">';
+
+                    <div class="row mt-4" style="display:none">
+                        <div class="col-sm-8 col-md-8 col-lg-8">';
                         $i=1;
                         while($rowsteps = mysqli_fetch_assoc($resultstep)) {
-                            echo '<h1>Step '.$i.'</h1>
-                                <p>'.$rowsteps['description'] .'</p>
+                            echo '<span class="stepsTitel p-1 pr-4 my-2">Step '.$i.'</span>
+                                <p class="stepsText mt-2">'.$rowsteps['description'] .'</p>
                                 <br>';
                             $i++;
                         }
+
                         echo '</div>
-                            <div class="col-sm-4">
-                                <span><i class="fa fa-minus-circle"></i></span><span class="mx-2">A DISH FOR '.$row['dish'].'</span><span><i class="fa fa-plus-circle"></i></span>';
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    <span class="text-warning font-weight-bold border-bottom border-warning px-2">
+                                        <span><i class="fa fa-minus-circle"></i></span>
+                                        <span class="mx-2 reciFood">A DISH FOR '.$row['dish'].'</span>
+                                        <span><i class="fa fa-plus-circle"></i></span>
+                                    </span>';
 
                             while($rowingr = mysqli_fetch_assoc($resultingr)) {
-                            echo '<div>
-                                    <span >'.$rowingr['amount'].'</span>
-                                    <span >'.$rowingr['unit'].'</span>
-                                    <span >'.$rowingr['description'].'</span>
+                            echo '<div class="reciFood">
+                                    <span >'.$rowingr['amount'].' '.$rowingr['unit'].'</span>
+                                    <span class="ml-2">'.$rowingr['description'].'</span>
                                   </div>';
                             }
                             echo 
-                        '</div>
-                    </div>
-                ';
+                            '</div>
+                        </div>
+                        ';
             }
 
             // Free result set
@@ -109,7 +114,7 @@
             // Close connection
             mysqli_close($conn);
         ?>
-        </div>
+        
     </div>
     <!-- Main Content -->
 
