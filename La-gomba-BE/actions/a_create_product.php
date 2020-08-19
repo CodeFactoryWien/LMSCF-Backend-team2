@@ -17,11 +17,13 @@
 	$date_from = mysqli_real_escape_string($conn, $_POST['date_from']);
 	$amount = mysqli_real_escape_string($conn, $_POST['amount']);
     $unit = mysqli_real_escape_string($conn, $_POST['unit']);
+    $date_to = mysqli_real_escape_string($conn, $_POST['date_to']);
+    $quality_description = mysqli_real_escape_string($conn, $_POST['quality_description']);
 	// attempt insert query execution
 	$sql = "INSERT INTO products 
-	(name, image, quality, price, description, date_from, amount, unit) 
+	(name, image, quality, price, description, date_from, date_to, amount, quality_description, unit) 
 	VALUES 
-	('$name', '$image', '$quality', '$price', '$description', '$date_from', '$amount', '$unit')";
+	('$name', '$image', '$quality', '$price', '$description', '$date_from', '$date_to', '$amount', '$quality_description', '$unit')";
 	
 	if (mysqli_query($conn, $sql)) {
 	    echo "New product created.";

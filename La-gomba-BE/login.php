@@ -66,11 +66,10 @@
 <html>
 <?php include 'head.php'; ?>
 <body>
-    <div class="container mx-auto my-auto w-75 bg-dark py-3">
-        <div class="container mx-auto my-auto w-75 bg-dark py-3">
+    <div class="container mx-auto my-5 w-75 bg-dark py-3">
         <h3 class="text-center text-danger my-3"><?php if ( isset($errMSG) ) {echo  $errMSG; }?></h3>
         <form method="post"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete= "off">
-            <h3 class="text-center text-white mb-3">Login</h3>
+            <h3 class="text-center text-warning mb-3">Login</h3>
             <div class="form-group col-sm-5 mx-auto px-0">
                 <label for="username" class="text-white">Username:</label><br>
                 <input type="email" name="email" id="email" class="form-control" placeholder= "Your Email" value="<?php echo $email;?>" maxlength="40">
@@ -91,7 +90,7 @@
                 </a>
             </div>
         </form>
-        </div>   
+          
     </div> 
 </body>
 </html>

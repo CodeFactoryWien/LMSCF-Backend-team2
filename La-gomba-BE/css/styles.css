@@ -43,7 +43,7 @@ a {
 }
 
 .logo {
-    width: 12vw;
+    width: 15vw;
 }
 
 .logo1 {
@@ -60,9 +60,9 @@ a {
 }
 
 
-/* .active img {
+.active img {
     width: 100%;
-} */
+}
 
 .prodimg {
     height: 40vh;
@@ -81,7 +81,7 @@ a {
 }
 
 .link {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .back {
@@ -143,51 +143,101 @@ a {
     width: 45%;
 }
 
+.active .recibody {
+    height: 45.5vh!important;
+    width: 45%;
+}
 
 /* new stuff end */
 
-
 .accordion img {
+    height: 65vh;
+}
+
+.recimg img {
     height: 60vh;
 }
 
-
-
 @media(max-width: 660px) {
-    .jumbotron h1 {
-        font-size: 4.4rem!important;  
-    }
-
-    .jumbotron p {
-        font-size: 1.8rem!important;
-    }
-
-  
     .navbar-nav a {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 
     .logo {
-        width: 24vw;
+        width: 35vw;
+    }
+
+    .logo1 {
+        width: 65vw;
     }
 
     .title h5 {
-        font-size: 0.8rem!important;
+        font-size: 0.9rem!important;
     }
 
     .title p {
-        font-size: 0.7rem!important;
+        font-size: 0.8rem!important;
     }
 
+    .reciTitle{
+        font-size: 1.7rem!important;
+    }
+
+    .reciDescription{
+        font-size: 1rem!important;
+    }
+
+    .reciDifficulty{
+        font-size: 0.9rem!important;
+    }
+    .recibody {
+        padding-left: 10px!important;
+    }
+
+    .active img {
+        height: 46vh!important;
+    }
+
+    .active {
+        height: 47vh!important;
+    }
+
+    .active .recibody {
+        width: 54%;
+    }
 
 }
 
 @media(min-width: 661px) and (max-width: 1000px) {
     .navbar-nav a {
-        font-size: 0.6rem;
+        font-size: 0.8rem;
     }
 
     .logo {
         width: 15vw;
+    }
+
+    .logo1 {
+        width: 30vw;
+    }
+
+    .active {
+        height: 50vh;
+    }
+
+    .active img {
+        height: 49vh!important;
+    }
+
+    .reciTitle{
+        font-size: 3rem!important;
+    }
+
+    .reciDescription{
+        font-size: 1.1rem!important;
+    }
+
+    .link {
+        font-size: 1.2rem!important;
     }
 }

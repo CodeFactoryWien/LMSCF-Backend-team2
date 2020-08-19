@@ -27,7 +27,7 @@ $(document).ready(function(){
         });
     });
 
-    // Create recipe function
+    // Create product function
     $("#productDataButton").click(function(){
         data = $('#productData').serialize();
         $.ajax({

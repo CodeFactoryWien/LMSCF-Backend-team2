@@ -49,11 +49,11 @@
 	            <img src="<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5" >
 	            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 py-3 pl-3 pr-5">
 	                <?php echo "
-                    <h4 class='text-danger'>For now delivery is only possible in Vienna (Or pick-up at our cellar)</h4>
-	                <h2><b> ". $row['name']."</b></h2>
+                        <h4 class='text-danger'>For now delivery is only possible in Vienna (Or pick-up at our cellar)</h4>
+                        <h2><b> ". $row['name']."</b></h2>
 	                    <h4><b>Quality ".$row['quality']."</b></h4>
 	                    <p class='pr-4'>".$row['description']."</p>
-	                    <p><b>What is ".$row['quality']."?</b><br>
+	                    <p><b>What is ".$row['quality_decr']."?</b><br>
 	                    ".$row['qualityDescription']."</p>
 	                    <p><b>Next Harvest: </b><i class='fa fa-calendar-check-o' aria-hidden='true'></i> ".$row['date_from']."<br>
 	                    <b>Requires delivery by </b> ".$row['date_to']."</p>

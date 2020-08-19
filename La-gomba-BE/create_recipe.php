@@ -33,7 +33,7 @@
         <form action="actions/a_create_recipe.php" method ="post" id="recipeData">
             <hr class="border border-warning">
                 <label class="text-warning">Recipe Details: </label>
-            <hr class="border border-warning "> 
+            <hr class="border border-warning"> 
             <div class="form-row justify-content-center"> 
                 <div class="form-group col-md-4 mb-2">
                     <label for="name">Name: </label>
@@ -59,7 +59,6 @@
                 <label for="description">Description: </label>
                 <textarea type="text" class="form-control" name="description" placeholder="Recipe short description"></textarea> 
             </div>
-            
             <hr class="border border-warning mt-4">
                 <label class="text-warning">Recipe Steps: </label>
             <hr class="border border-warning mb-4">
@@ -88,7 +87,7 @@
             <hr class="border border-warning mt-4">
                 <label class="text-warning">Recipe image: </label>
             <hr class="border border-warning mb-4">
-            <div class="form-row justify-content-center mb-2">
+            <div class="form-row justify-content-center mb-5">
                 <form method="post" action="" enctype="multipart/form-data" id="myform">
                     <div class='preview col-sm-4 mb-2 w-50'>
                         <img src="" id="img" class="w-100 h-100" >
@@ -100,9 +99,8 @@
                 </form>
                 <input type="hidden" id="image" name="image" value="">
             </div>
-            
             <div class="form-group col-md-5 mx-auto px-0 mt-4">
-                <input type="submit" class="btn btn-success form-control" value="Submit" id="recipeDataButton">
+                <input type="submit" class="btn btn-success form-control font-weight-bold" value="Create Recipe" id="recipeDataButton">
             </div>
         </form>
     </div>

@@ -89,17 +89,17 @@
 <?php include 'head.php'; ?>
 <body>
   
-    <div class="container font-weight-bold mx-auto my-4 py-3">
+    <div class="container font-weight-bold mx-auto bg-dark my-3 py-3">
         <h3 class="text-center text-red my-3"><?php if ( isset($errMSG) ) {echo  $errMSG; }?></h3>
         <form method="post"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete= "off">
-            <h3 class="text-center text-white">Register</h3>
+            <h3 class="text-center text-warning">Register</h3>
             <div class="form-group col-sm-5 mx-auto px-0">
-                <label for="name" class="text-dark">Your name:</label><br>
+                <label for="name" class="text-white">Your name:</label><br>
                 <input type="text" name="name" id="name" class="form-control" placeholder= "Enter Full Name" value="<?php echo $name;?>" maxlength="50">
                 <span class="text-danger"><?php  echo $nameError; ?></span >
             </div>
             <div class="form-group col-sm-5 mx-auto px-0">
-                <label for="phone" class="text-dark">Phone Number:</label><br>
+                <label for="phone" class="text-white">Phone Number:</label><br>
                 <input type="text" name="phone" id="phone" class="form-control" placeholder= "Your phone number" value="<?php echo $phone;?>" maxlength="50">
                 <span class="text-danger"><?php  echo $nameError; ?></span >
             </div>
@@ -114,7 +114,7 @@
                 <span class="text-danger"><?php  echo $emailError; ?></span >
             </div>
             <div class="form-group col-sm-5 mx-auto px-0">
-                <label for="password" class="text-info">Password:</label><br>
+                <label for="password" class="text-white">Password:</label><br>
                 <input type="password" name="pass" id="password" class="form-control" placeholder="Enter Password"  maxlength="15">
                 <span class="text-danger"><?php  echo $passError; ?></span>
             </div>
@@ -122,8 +122,8 @@
                 <label for="remember-me" class="text-white my-auto"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
             </div>
             <div class="form-group col-sm-5  mx-auto px-0">  
-                <input type="submit" name="btn-signup" class="btn btn-dark btn-md mb-2" value="Sign Up">
-                <a href="index.php" class=" btn btn-outline-dark btn-md mb-2">
+                <input type="submit" name="btn-signup" class="btn btn-warning btn-md mb-2" value="Sign Up">
+                <a href="login.php" class=" btn btn-outline-warning btn-md mb-2">
                 Sign in here 
                 </a>
             </div>

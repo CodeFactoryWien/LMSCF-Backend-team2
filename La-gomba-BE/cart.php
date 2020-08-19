@@ -81,8 +81,10 @@
 		      <tr>
 		        <th>Image</th>
 		        <th>Name</th>
-		        <th>Price</th>
+		        <th>Quality</th>
+                <th>Price</th>
 		        <th>Qty</th>
+                <th>Unit</th>
                 <th>Actions</th>
 		      </tr>
 		    </thead>
@@ -90,18 +92,19 @@
 		    <?php foreach($_SESSION['products'] as $key=>$product):?>
                 <input type="hidden" value="<?php print $key;?>" name="ids[]">
                 <input type="hidden" value="<?php print $product['qty'];?>" name="amounts[]">
-            
     		    <tr>
     		      <td><img src="<?php print $product['image']?>" width="50"></td>
     		      <td><?php print $product['name']?></td>
+                  <td><?php print $product['quality']?>‎</td>
     		      <td>€<?php print $product['price']?>‎</td>
     		      <td><?php print $product['qty']?></td>
+                  <td><?php print $product['unit']?></td>
                   <td><a href="cart.php?action=empty&product_id=<?php print $key?>" class="btn btn-danger">Delete</a></td>
     		    </tr>
     		    <?php $total = $total+($product['price']*$product['qty']);?>
     		    <?php endforeach;?>
 
-    		    <tr><td colspan="5" align="right"><h4>Total:€<?php print $total?>‎</h4></td></tr>
+    		    <tr><td colspan="t" align="right"><h4>Total:€<?php print $total?>‎</h4></td></tr>
         </table>
         <div class="row">
             <div class="col-sm-12 mx-auto">
@@ -128,7 +131,7 @@
             </div>
         </div>
         
-    <?php } else { echo '<h1 class="text-center"><b>The card is empty!<b></h1>'; } ?>
+    <?php } else { echo '<h1 class="text-center"><b>The cart is empty!<b></h1>'; } ?>
     </div>
 
     <!-- Footer -->

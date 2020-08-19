@@ -37,7 +37,7 @@
     <?php
         include 'nav_admin.php';
     ?>
-    <div class="container mx-auto bg-dark font-weight-bold mt-2 py-3 text-info">
+    <div class="container mx-auto bg-dark font-weight-bold my-4 py-3 text-warning">
         <form action="actions/a_update_product.php" method ="post" id="productDataUpdate">
             <input type= "hidden" name="product_id" value="<?php echo $data['product_id'] ?>" />
             <div class="form-row justify-content-center">
@@ -62,11 +62,11 @@
                 </div>
             </div>
             <div class="form-row justify-content-center">
-                <div class="form-group col-md-4 mb-2 mx-auto px-0">
+                <div class="form-group col-md-4 mb-2">
                     <label for="amount">Amount: </label>
                     <input type="text" class="form-control" name="amount" placeholder="Mushroom amount" value="<?php echo $data['amount'] ?>">
                 </div>
-                <div class="form-group col-md-4 mb-2 mx-auto px-0">
+                <div class="form-group col-md-4 mb-2">
                     <label for="unit">Unit: </label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -79,11 +79,11 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-8 mb-2 mx-auto px-0">
+            <div class="form-group col-md-8 mb-5 mx-auto px-0">
                 <label for="description">Description: </label>
                 <textarea type="text" class="form-control" name="description" placeholder="Mushroom short description"><?php echo $data['description'] ?></textarea> 
             </div>
-            <div class="form-row justify-content-center mb-2">
+            <div class="form-row justify-content-center mb-5">
                 <input type="hidden" id="image" name="image" value="<?php echo $data['image'] ?>">
                 <form method="post" action="" enctype="multipart/form-data" id="myform">
                     <div class='preview-update col-sm-4 mb-2 w-50'>
@@ -96,7 +96,7 @@
                 </form>
             </div>
             <div class="form-group col-md-4 mx-auto">
-                <input type="submit" class="btn btn-warning form-control" id="productDataUpdateButton" value="Update Product">
+                <input type="submit" class="btn btn-warning form-control font-weight-bold" id="productDataUpdateButton" value="Update Product">
             </div>
 
         </form>

@@ -45,18 +45,15 @@
             $sql = "SELECT * FROM recipes";
             $result = mysqli_query($conn, $sql);
 
-            //if (count(mysqli_fetch_assoc($result))===0)  {
-            //    echo '<h1 class="text-center font-weight-bold">There are no Recipes</h1>';
-            //}
             while($row = mysqli_fetch_assoc($result)) {
 
                 $sqlstep = "SELECT * FROM recipe_steps where recipe_id=".$row['recipe_id'];
                 $resultstep = mysqli_query($conn, $sqlstep);
                 $sqlingr = "SELECT * FROM recipe_ingredients where recipe_id=".$row['recipe_id'];
                 $resultingr = mysqli_query($conn, $sqlingr);
-                echo '<div class="accordion row reciCard bg-white my-4"> 
-                        <img class="img-fluid col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 p-0" src="'.$row['image'].'" alt="'.$row['name'].'">
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8  py-3 pl-5">
+                echo '<div class="accordion row reciCard bg-white my-4 mx-auto">
+                        <img class="img-fluid col-xs-4 col-sm-4 p-0" src="'.$row['image'].'" alt="'.$row['name'].'">
+                        <div class="col-xs-8 col-sm-8 recibody py-3 pl-5 pr-0">
                             <h1 class="reciTitle">'
                                 .$row['name'].
                             '</h1>
@@ -64,8 +61,8 @@
                                 .$row['description'].
                             '</p>
                             
-                            <div class="align-self-end">
-                                <span class="reciDifficulty">⏱️ '.$row['time'].'</span>
+                            <div class="mt-5 reciDifficulty">
+                                <span>⏱️ '.$row['time'].'</span>
                                 <span>📜 '.$row['difficulty'].'</span>
                             </div>';
                                 if(isset($_SESSION['admin'])) {
