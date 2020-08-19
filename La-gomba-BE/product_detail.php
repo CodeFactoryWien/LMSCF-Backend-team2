@@ -49,26 +49,34 @@
 	            <img src="<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5" >
 	            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 py-3 pl-3 pr-5">
 	                <?php echo "
-                        <h4 class='text-danger'>For now delivery is only possible in Vienna (Or pick-up at our cellar)</h4>
-                        <h2><b> ". $row['name']."</b></h2>
-	                    <h4><b>Quality ".$row['quality']."</b></h4>
-	                    <p class='pr-4'>".$row['description']."</p>
-	                    <p><b>What is ".$row['quality_decr']."?</b><br>
-	                    ".$row['qualityDescription']."</p>
-	                    <p><b>Next Harvest: </b><i class='fa fa-calendar-check-o' aria-hidden='true'></i> ".$row['date_from']."<br>
-	                    <b>Requires delivery by </b> ".$row['date_to']."</p>
-						<b>Stock: ".($row['amount']-$rowSales['total']) ."<br>
-	                    <p><b>Get 1 Kg for € ".$row['price'].".</b></p>  
+                        <h1 class='text-warning'><b> ". $row['name']."</b></h1>
+	                        <h4><b>Quality ".$row['quality']."</b></h4>
+	                            <p class='pr-4 text-justify'>".$row['description']."</p>
+                                <p class='pr-4 text-justify'>
+                                    <b>What does Quality ".$row['quality']." mean?</b><br>
+                                    ".$row['quality_description']."
+	                            </p>
+                                <p>
+                                    <b>Next Harvest date: </b><i class='fa fa-calendar-check-o' aria-hidden='true'></i> ".$row['date_from']."<br>
+                                    <b>Requires delivery by </b> ".$row['date_to']."
+                                </p>
+
+                                <p>
+                                    <b>Amount in stock: ".($row['amount']-$rowSales['total']) ." kg<br>
+                                    <b>Price: € ".$row['price'].".- per kg</b>
+                                </p>  
 	                ";?>
 	  					<!-- list.php?action=addcart -->
 	                <form action="" method="post">
-	                    <input class="" type="number" name="quantity" id="quantity" value="1" min="1" max="<?=($row['amount']-$rowSales['total'])?>" placeholder="Quantity" required>
+	                    <input class="p-1" type="number" name="quantity" id="quantity" value="1" min="1" max="<?=($row['amount']-$rowSales['total'])?>" placeholder="Quantity" required>
 	                    <select class="custom-select w-25" id="inputGroupSelect01" name="unit">
 	                        <option value="kg">Kg</option>
 	                    </select>
 	                    <input type="hidden" id="product_id" name="product_id" value="<?=$row['product_id']?>">
 	                    <input id="addcart" type="submit" value="Add To Cart" class="new btn btn-warning">
-	                </form>
+                    </form>
+
+                    <div class='alert alert-danger my-4 mx-auto'>ATTENTION! Delivery is only possible within the Vienna city zone!</div>
 	            </div>
 	        </div>
 	    </section>
