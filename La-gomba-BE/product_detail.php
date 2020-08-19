@@ -87,7 +87,8 @@
 	<!-- Main Content -->
 
 	
-
+    <!-- Modal Contact -->
+    <?php include 'contact.php'; ?>
 
     <!-- Footer -->
     <?php include 'footer.php'; ?>
