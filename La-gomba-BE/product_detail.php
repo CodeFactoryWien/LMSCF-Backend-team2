@@ -47,35 +47,39 @@
 	    <section>
 	        <div class="row my-5">
 	            <img src="<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5" >
-	            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 py-3 pl-3 pr-5">
+	            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 py-3 pl-3">
 	                <?php echo "
                         <h1 class='text-warning'><b> ". $row['name']."</b></h1>
 	                        <h4><b>Quality ".$row['quality']."</b></h4>
-	                            <p class='pr-4 text-justify'>".$row['description']."</p>
-                                <p class='pr-4 text-justify'>
-                                    <b>What does Quality ".$row['quality']." mean?</b><br>
-                                    ".$row['quality_description']."
-	                            </p>
-                                <p>
+                                <p class='text-justify mushroomInformation'>".$row['description']."</p>
+                                
+                            <h4 class='my-5'><b>Price: € ".$row['price'].".- per kg</b></h4>
+                        ";?>
+
+                        	<!-- list.php?action=addcart -->
+	                    <form action="" method="post">
+	                        <input class="p-1" type="number" name="quantity" id="quantity" value="1" min="1" max="<?=($row['amount']-$rowSales['total'])?>" placeholder="Quantity" required>
+	                        <select class="custom-select w-25" id="inputGroupSelect01" name="unit">
+	                        <option value="kg">Kg</option>
+	                        </select>
+	                        <input type="hidden" id="product_id" name="product_id" value="<?=$row['product_id']?>">
+	                        <input id="addcart" type="submit" value="Add To Cart" class="new btn btn-warning">
+                        </form>
+
+                        <?php echo "
+                                <div class='my-2'>Amount currently in stock: ".($row['amount']-$rowSales['total']) ." kg</div>
+
+                                <p class='mt-4 mushroomInformation'>
                                     <b>Next Harvest date: </b><i class='fa fa-calendar-check-o' aria-hidden='true'></i> ".$row['date_from']."<br>
                                     <b>Requires delivery by </b> ".$row['date_to']."
                                 </p>
 
-                                <p>
-                                    <b>Amount in stock: ".($row['amount']-$rowSales['total']) ." kg<br>
-                                    <b>Price: € ".$row['price'].".- per kg</b>
-                                </p>  
+                                <p class='mt-4 text-justify mushroomInformation'>
+                                    <b>What does Quality ".$row['quality']." mean?</b><br>
+                                    ".$row['quality_description']."
+	                            </p> 
 	                ";?>
-	  					<!-- list.php?action=addcart -->
-	                <form action="" method="post">
-	                    <input class="p-1" type="number" name="quantity" id="quantity" value="1" min="1" max="<?=($row['amount']-$rowSales['total'])?>" placeholder="Quantity" required>
-	                    <select class="custom-select w-25" id="inputGroupSelect01" name="unit">
-	                        <option value="kg">Kg</option>
-	                    </select>
-	                    <input type="hidden" id="product_id" name="product_id" value="<?=$row['product_id']?>">
-	                    <input id="addcart" type="submit" value="Add To Cart" class="new btn btn-warning">
-                    </form>
-
+	  			
                     <div class='alert alert-danger my-4 mx-auto'>ATTENTION! Delivery is only possible within the Vienna city zone!</div>
 	            </div>
 	        </div>

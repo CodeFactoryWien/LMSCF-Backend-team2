@@ -158,6 +158,10 @@ a {
     height: 60vh;
 }
 
+.mushroomInformation{
+    font-size: 1.2rem!important;
+}
+
 @media(max-width: 660px) {
     .navbar-nav a {
         font-size: 0.8rem;
@@ -204,6 +208,10 @@ a {
 
     .active .recibody {
         width: 54%;
+    }
+
+    .mushroomInformation{
+        font-size: 1rem!important;
     }
 
 }
