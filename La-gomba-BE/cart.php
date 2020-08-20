@@ -25,7 +25,7 @@
         $getProduct = mysqli_query($conn, $query);
         $product = mysqli_fetch_array($getProduct, MYSQLI_ASSOC);
         $currentQty = $_SESSION['products'][$_POST['product_id']]['qty']+$_POST['quantity'];
-        $_SESSION['products'][$_POST['product_id']]=array('qty'=>$currentQty,'name'=>$product['name'],'image'=>$product['image'],'price'=>$product['price'], 'amount'=>$product['amount']);
+        $_SESSION['products'][$_POST['product_id']]=array('qty'=>$currentQty,'name'=>$product['name'],'image'=>$product['image'],'price'=>$product['price'], 'amount'=>$product['amount'], 'quality'=>$product['quality'], 'unit'=>$product['unit']);
         $product='';
         echo 'success';
         exit;
@@ -42,8 +42,7 @@
         $product_id = $_GET['product_id'];
         $products = $_SESSION['products'];
         unset($products[$product_id]);
-        $_SESSION['products']= $products;
-        //header("Location:shopping-cart.php");   
+        $_SESSION['products']= $products;   
     }
 
     include_once 'actions/Paypal.php';

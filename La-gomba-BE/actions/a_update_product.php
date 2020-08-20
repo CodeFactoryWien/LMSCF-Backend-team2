@@ -27,7 +27,6 @@
 
         if(mysqli_multi_query($conn, $sql) === TRUE) {
            echo  "Successfully Updated";
-           //header("Refresh: 2; url= ../products.php");
         } else {
             echo "Error while updating : ". mysqli_error($conn);
         }

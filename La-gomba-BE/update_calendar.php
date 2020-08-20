@@ -37,7 +37,7 @@
     <?php
         include 'nav_admin.php';
     ?>
-    <div class="container mx-auto bg-dark font-weight-bold mt-2 py-3">
+    <div class="container mx-auto bg-dark font-weight-bold text-white mt-2 py-3">
         <form action="actions/a_update_calendar.php" method ="post" >
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-4 mb-2">
@@ -56,7 +56,7 @@
             
             <div class="form-group col-md-4 mx-auto">
                 <input type= "hidden" name="harvest_id" value="<?php echo $data['harvest_id'] ?>" />
-                <input type="submit" class="btn btn-dark form-control" value="Update Date">
+                <input type="submit" class="btn btn-success form-control" value="Update Harvest">
             </div>
 
         </form>

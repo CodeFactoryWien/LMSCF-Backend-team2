@@ -70,12 +70,8 @@
                 </div> 
             </div>
             <div class="form-group col-sm-8 mb-2 mx-auto px-0">
-                <label for="image">Image: </label>
-                <input type="url" class="form-control" name="image" placeholder="product image path" value="<?php echo $data['image'] ?>">
-            </div>
-            <div class="form-group col-sm-8 mb-2 mx-auto px-0">
                 <label for="description">Description: </label>
-                <textarea type="text" class="form-control" name="description" placeholder="Recipe short description"><?php echo $data['description'] ?></textarea> 
+                <textarea type="text" rows="4" class="form-control" name="description" placeholder="Recipe short description"><?php echo $data['description'] ?></textarea> 
             </div>
             <hr class="border border-warning mt-4">
                 <label class="text-warning">Recipe Steps: </label>
@@ -158,7 +154,7 @@ mysqli_close($conn);
 }
 ?>
 <?php ob_end_flush(); ?>
-
+<script src="js/recipes.js"></script>
 <script type="text/javascript">
    function remove(data) {
         $(data).remove();

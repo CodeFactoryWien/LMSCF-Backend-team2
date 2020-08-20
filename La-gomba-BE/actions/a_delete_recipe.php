@@ -35,7 +35,7 @@
                 $sql .= "DELETE FROM recipes WHERE recipe_id = {$id}";
 
                 if($conn->multi_query($sql) === TRUE) {
-                    echo "<h1 class='text-dark'>Successfully deleted!!</h1>" ;
+                    echo "<h1 class='text-dark'>Successfully deleted!</h1>" ;
                     header("Refresh: 2; url= ../recipes.php");
                 } else {
                 echo "Error updating record : " . $conn->error;

@@ -47,7 +47,7 @@
             </div>
             
             <div class="form-group col-md-4 mx-auto">
-                <input type="submit" class="btn btn-success form-control" value="Submit">
+                <input type="submit" class="btn btn-success form-control" value="Create Harvest">
             </div>
         </form>
     </div>

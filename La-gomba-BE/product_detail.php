@@ -52,6 +52,10 @@
                         <h1 class='text-warning'><b> ". $row['name']."</b></h1>
 	                        <h4><b>Quality ".$row['quality']."</b></h4>
                                 <p class='text-justify mushroomInformation'>".$row['description']."</p>
+                                <p class='mt-4 text-justify mushroomInformation'>
+                                    <b>What does Quality ".$row['quality']." mean?</b><br>
+                                    ".$row['quality_description']."
+                                </p> 
                                 
                             <h4 class='my-5'><b>Price: € ".$row['price'].".- per kg</b></h4>
                         ";?>
@@ -71,13 +75,10 @@
 
                                 <p class='mt-4 mushroomInformation'>
                                     <b>Next Harvest date: </b><i class='fa fa-calendar-check-o' aria-hidden='true'></i> ".$row['date_from']."<br>
-                                    <b>Requires delivery by </b> ".$row['date_to']."
+                                    <b>Requires delivery by </b><i class='fa fa-calendar-check-o' aria-hidden='true'></i> ".$row['date_to']."
                                 </p>
 
-                                <p class='mt-4 text-justify mushroomInformation'>
-                                    <b>What does Quality ".$row['quality']." mean?</b><br>
-                                    ".$row['quality_description']."
-	                            </p> 
+                                
 	                ";?>
 	  			
                     <div class='alert alert-danger my-4 mx-auto'>ATTENTION! Delivery is only possible within the Vienna city zone!</div>

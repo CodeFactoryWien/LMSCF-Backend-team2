@@ -26,6 +26,14 @@
         $pass = strip_tags($pass);
         $pass = htmlspecialchars($pass);
 
+        $address = trim($_POST['address']);
+        $address = strip_tags($address);
+        $address = htmlspecialchars($address);
+
+        $phone = trim($_POST['phone']);
+        $phone = strip_tags($phone);
+        $phone = htmlspecialchars($phone);
+
         // basic name validation
         if (empty($name)) {
             $error = true ;
@@ -67,7 +75,8 @@
         // if there's no error, continue to signup
         if( !$error ) {
 
-        $query = "INSERT INTO users(userName,userEmail,userPass) VALUES('$name','$email','$password')";
+        $query = "INSERT INTO users(userName,userEmail,userPass, address, phone) VALUES('$name','$email','$password', '$address','$phone')";
+        echo $query;
         $res = mysqli_query($conn, $query);
             if ($res) {
                 $errTyp = "success";
@@ -90,7 +99,7 @@
 <body>
   
     <div class="container font-weight-bold mx-auto bg-dark my-3 py-3">
-        <h3 class="text-center text-red my-3"><?php if ( isset($errMSG) ) {echo  $errMSG; }?></h3>
+        <h3 class="text-center text-white my-3"><?php if ( isset($errMSG) ) {echo  $errMSG; }?></h3>
         <form method="post"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete= "off">
             <h3 class="text-center text-warning">Register</h3>
             <div class="form-group col-sm-5 mx-auto px-0">

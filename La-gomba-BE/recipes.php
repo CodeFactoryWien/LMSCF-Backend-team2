@@ -67,9 +67,11 @@
                             </div>';
                                 if(isset($_SESSION['admin'])) {
                                     echo '
-                                    <div class="my-3">
-                                        <a href="update_recipe.php?id='.$row['recipe_id'].'" type="button" class="btn btn-success py-2 px-3 m-2">Update</a>
-                                        <a href="delete_recipe.php?id='.$row['recipe_id'].'" type="button" class="btn btn-danger py-2 px-3 m-2">Delete</a>
+                                    <div class="reclink my-2">
+                                        <a href="update_recipe.php?id='.$row['recipe_id'].'" type="button" class="font-weight-bold text-warning m-4">
+                                        <i class="fa fa-pencil-square" aria-hidden="true"></i>Update</a>
+                                        <a href="delete_recipe.php?id='.$row['recipe_id'].'" type="button" class="font-weight-bold text-danger m-4">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
                                     </div>';
                                 } 
                                echo '

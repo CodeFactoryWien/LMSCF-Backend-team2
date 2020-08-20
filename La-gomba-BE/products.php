@@ -85,10 +85,9 @@
                             <div class='m-2 text-white' >
                                 <h5 > ". $data['name']."</h5>
                                 <div>
-                                <span> from  ".$data['date_from']."</span>
-                                <span> to  ". $data['date_to']."</span>
+                                <span> from  <i class='fa fa-calendar-check-o' aria-hidden='true'></i> ".$data['date_from']."</span>
+                                <span> to  <i class='fa fa-calendar-check-o' aria-hidden='true'></i> ". $data['date_to']."</span>
                                 </div>
-                                <hr class='border border-warning'>
                                 ";       
                                 
                                     if(isset($_SESSION['admin'])) {
@@ -99,7 +98,8 @@
                                         <i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
                                         ';
                                         } 
-                                        echo '          
+                                        echo '
+                                <hr class="border border-warning">          
                             </div>';
                         }
 

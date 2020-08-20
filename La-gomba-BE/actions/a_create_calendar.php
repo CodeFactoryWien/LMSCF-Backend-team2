@@ -39,10 +39,10 @@
 			('$name', '$date_from','$date_from')";
 			
 			if (mysqli_query($conn, $sql)) {
-			    echo "<h1 class='text-dark'>New date created.<h1>";
+			    echo "<h1 class='text-dark'>New harvest created.<h1>";
 			    header("Refresh: 2; url= ../products.php");
 			} else {
-			    echo "<h1 class='text-red'>Something went wrong, please try again: </h1>" .
+			    echo "<h1 class='text-red'>Something went wrong, please try again! </h1>" .
 			         "<p>"  . $sql . "</p>" .
 			         mysqli_error($conn);
 			}

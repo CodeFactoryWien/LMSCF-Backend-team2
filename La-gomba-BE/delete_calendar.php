@@ -24,8 +24,8 @@
 <?php include 'head.php'; ?>
 <body>
 	<?php include 'nav_admin.php'; ?>
-	<div class="container mt-4 mx-auto text-center">
-		<h3 class="text-dark">Do you really want to delete this product?</h3>
+	<div class="container my-4 mx-auto text-center">
+		<h3 class="text-dark">Do you really want to delete this harvest?</h3>
 		<form action ="actions/a_delete_calendar.php" method="post">
 			<input type="hidden" name="id" value="<?php echo $id ?>" />
 		    <button class="btn btn-danger" type="submit">Yes, delete it!</button >

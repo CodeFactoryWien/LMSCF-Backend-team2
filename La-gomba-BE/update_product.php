@@ -46,19 +46,29 @@
                     <input type="text" class="form-control" name="name" placeholder="Mushroom Name" value="<?php echo $data['name'] ?>">
                 </div>
                 <div class="form-group col-md-4 mb-2">
-                    <label for="quality">Quality: </label>
-                    <input type="text" class="form-control" name="quality" placeholder="Quality" value="<?php echo $data['quality'] ?>">
-                </div>
-            </div>
-            <div class="form-row justify-content-center">
-                <div class="form-group col-md-4 mb-2">
                     <label for="price">Price: </label>
                     <input type="text" class="form-control" name="price" 
                     placeholder="Product price" value="<?php echo $data['price'] ?>">
                 </div>
+            </div>
+            <div class="form-row justify-content-center">
+                <div class="form-group col-md-4 mb-2">
+                    <label for="quality">Quality: </label>
+                    <input type="text" class="form-control" name="quality" placeholder="Quality" value="<?php echo $data['quality'] ?>">
+                </div>
+                <div class="form-group col-md-4 mb-2">
+                    <label for="quality_description">Quality description: </label>
+                    <input type="text" class="form-control" name="quality_description" placeholder="Quality description" value="<?php echo $data['quality_description'] ?>">
+                </div>
+            </div>
+            <div class="form-row justify-content-center">
                 <div class="form-group col-md-4 mb-2">
                     <label for="date_from">Available from: </label>
                     <input type="date" class="form-control" name="date_from" placeholder="Available from this date" value="<?php echo $data['date_from'] ?>">
+                </div>
+                <div class="form-group col-md-4 mb-2">
+                    <label for="date_to">Available to: </label>
+                    <input type="date" class="form-control" name="date_to" placeholder="To this date" value="<?php echo $data['date_to'] ?>">
                 </div>
             </div>
             <div class="form-row justify-content-center">
@@ -81,7 +91,7 @@
             </div>
             <div class="form-group col-md-8 mb-5 mx-auto px-0">
                 <label for="description">Description: </label>
-                <textarea type="text" class="form-control" name="description" placeholder="Mushroom short description"><?php echo $data['description'] ?></textarea> 
+                <textarea type="text" rows="4" class="form-control" name="description" placeholder="Mushroom short description"><?php echo $data['description'] ?></textarea> 
             </div>
             <div class="form-row justify-content-center mb-5">
                 <input type="hidden" id="image" name="image" value="<?php echo $data['image'] ?>">

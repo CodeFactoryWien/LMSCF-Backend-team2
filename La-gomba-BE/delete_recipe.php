@@ -24,7 +24,7 @@
 <?php include 'head.php'; ?>
 <body>
 	<?php include 'nav_admin.php'; ?>
-	<div class="container mt-4 mx-auto text-center">
+	<div class="container my-4 mx-auto text-center">
 		<h3 class="text-dark">Do you really want to delete this recipe?</h3>
 		<form action ="actions/a_delete_recipe.php" method="post">
 			<input type="hidden" name="id" value="<?php echo $id ?>" />

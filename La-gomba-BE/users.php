@@ -9,7 +9,7 @@
         exit;
     } 
 
-    if( isset($_SESSION['admin'])) {
+    if(isset($_SESSION['admin'])) {
         // select logged-in users details
         $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['admin']);
         $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);

@@ -3,8 +3,10 @@
     session_start();
     require_once 'actions/db_connect.php';
 
-    if( isset($_SESSION['admin']) && isset($_SESSION['user']) ) {
-        // select logged-in users details
+    if(isset($_SESSION['admin'])) {
+        $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['admin']);
+        $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+    } else if(isset($_SESSION['user'])) {
         $res=mysqli_query($conn, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
         $userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
     }
@@ -20,7 +22,7 @@
     
     <!-- Main Navbar -->
     <?php
-        if(!isset($_SESSION['user'])) {
+        if(isset($_SESSION['user'])) {
           include 'nav_user.php';
         } else {
           include 'nav_admin.php';
