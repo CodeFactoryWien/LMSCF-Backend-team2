@@ -52,7 +52,7 @@
                 $sqlingr = "SELECT * FROM recipe_ingredients where recipe_id=".$row['recipe_id'];
                 $resultingr = mysqli_query($conn, $sqlingr);
                 echo '<div class="accordion row reciCard bg-white my-4 mx-auto">
-                        <img class="img-fluid col-xs-4 col-sm-4 p-0" src="'.$row['image'].'" alt="'.$row['name'].'">
+                        <img class="img-fluid col-xs-4 col-sm-4 p-0" src="'.$row['image'].'" alt="">
                         <div class="col-xs-8 col-sm-8 recibody py-3 pl-5 pr-0">
                             <h1 class="reciTitle">'
                                 .$row['name'].

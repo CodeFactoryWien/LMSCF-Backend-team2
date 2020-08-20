@@ -22,7 +22,7 @@
     
     <!-- Main Navbar -->
     <?php
-        if(isset($_SESSION['user'])) {
+        if(!isset($_SESSION['admin'])) {
           include 'nav_user.php';
         } else {
           include 'nav_admin.php';

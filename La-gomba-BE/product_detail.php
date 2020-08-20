@@ -46,7 +46,7 @@
     <div  class="container-fluid mx-auto my-4 px-4">
 	    <section>
 	        <div class="row my-5">
-	            <img src="<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5" >
+	            <img src="<?php echo $row['image']?>" alt="<?=$row['name']?>" class="img-fluid detailimg col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 my-auto">
 	            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 py-3 pl-3">
 	                <?php echo "
                         <h1 class='text-warning'><b> ". $row['name']."</b></h1>

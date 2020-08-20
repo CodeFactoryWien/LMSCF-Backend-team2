@@ -31,7 +31,7 @@
 
     <!-- Main Content -->
     <div class="container-fluid row mx-auto">
-        <div  class="container-fluid col-xs-10  col-md-9 row row-cols-1 row-cols-md-2 row-cols-lg-2 mx-auto my-4 p-0">
+        <div  class="container-fluid col-xs-10  col-md-10 col-lg-9 row row-cols-1 row-cols-md-2 row-cols-lg-2 mx-auto my-4 p-0">
             <?php
                 $sql = "SELECT * FROM products";
                 $result = mysqli_query($conn, $sql);
@@ -39,7 +39,7 @@
                 while($row = mysqli_fetch_assoc($result)) {
                     echo "
                     <div class='col mb-4'>
-                        <div class='card h-100'>
+                        <div class='card'>
                             <img src=".$row['image']." class='card-img-top prodimg' alt='...'>
                             <div class='card-body'>
                                 <h3 class='card-title text-warning'>". $row['name']."</h3>
@@ -72,7 +72,7 @@
                
             ?>
         </div>
-        <div class="harvest rounded container-fluid col-xs-10 col-md-3 my-4 p-3 bg-secondary border border-warning">
+        <div class="harvest rounded container-fluid col-xs-10 col-md-10 col-lg-3 my-4 p-3 bg-secondary border border-warning">
             <div class="d-flex flex-column">
                     <h3 class="text-warning">Upcoming harvests:</h3>
                     
